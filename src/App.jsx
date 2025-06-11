@@ -2,12 +2,29 @@ import { useState, useEffect } from "react";
 import { ALL_GROUPS } from "./constants/words";
 import "./App.css";
 
-function Modal({ word, meaning, onClose }) {
+function Modal({
+  word,
+  meaning,
+  onClose,
+  partOfSpeech,
+  exampleUse1,
+  exampleUse2,
+}) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h3>{word}</h3>
-        <p>{meaning}</p>
+        <p className="modal-meaning">{meaning}</p>
+        {partOfSpeech && (
+          <p className="modal-pos">Part of Speech: {partOfSpeech}</p>
+        )}
+        {exampleUse1 && (
+          <div className="modal-example">
+            <h4>Examples:</h4>
+            <p>1. {exampleUse1}</p>
+            {exampleUse2 && <p>2. {exampleUse2}</p>}
+          </div>
+        )}
         <button onClick={onClose} className="modal-close">
           Close
         </button>
@@ -97,7 +114,16 @@ function App() {
       setCorrectWords((prev) => [...prev, currentWord]);
       setTimeout(loadNewWord, 1500);
     } else {
-      setFeedback(`Incorrect. The correct word was "${currentWord.word}"`);
+      let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
+
+      if (currentWord.partOfSpeech) {
+        feedbackMessage += `\n${currentWord.partOfSpeech}`;
+      }
+      if (currentWord.exampleUse1) {
+        feedbackMessage += `\nExample: ${currentWord.exampleUse1}`;
+      }
+
+      setFeedback(feedbackMessage);
       setIncorrectWords((prev) => [
         ...prev,
         {
@@ -105,7 +131,7 @@ function App() {
           userGuess: userInput,
         },
       ]);
-      setTimeout(loadNewWord, 1500);
+      setTimeout(loadNewWord, 2500);
     }
   };
 
@@ -186,7 +212,9 @@ function App() {
                   feedback.includes("Correct") ? "correct" : "incorrect"
                 }`}
               >
-                {feedback}
+                {feedback.split("\n").map((line, index) => (
+                  <p key={index}>{line}</p>
+                ))}
               </div>
             )}
           </>
@@ -224,6 +252,9 @@ function App() {
         <Modal
           word={selectedWord.word}
           meaning={selectedWord.meaning}
+          partOfSpeech={selectedWord.partOfSpeech}
+          exampleUse1={selectedWord.exampleUse1}
+          exampleUse2={selectedWord.exampleUse2}
           onClose={() => {
             setShowModal(false);
             setSelectedWord(null);
