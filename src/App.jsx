@@ -155,7 +155,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="game-section">
-        <h1>GRE Vocab Game</h1>
+        <h1>Vocab Game</h1>
 
         <div className="group-selection">
           <h3>Select Word Groups:</h3>
@@ -260,6 +260,11 @@ function App() {
           }}
         />
       )}
+
+      <footer className="app-footer">
+        Based on GregMat's vocab list, made with{" "}
+        <span style={{ color: "red" }}>&hearts;</span> in Kerala
+      </footer>
     </div>
   );
 }
