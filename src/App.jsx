@@ -222,17 +222,6 @@ function App() {
       </div>
 
       <div className="results-container">
-        <div className="correct-words">
-          <h2>Correct Words ({correctWords.length})</h2>
-          <ul>
-            {correctWords.map((word, index) => (
-              <li key={index} onClick={() => handleWordClick(word)}>
-                {word.word}
-              </li>
-            ))}
-          </ul>
-        </div>
-
         <div className="incorrect-words">
           <h2>Incorrect Words ({incorrectWords.length})</h2>
           <ul>
@@ -242,6 +231,16 @@ function App() {
                 <span className="user-guess">
                   (you guessed: {attempt.userGuess})
                 </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="correct-words">
+          <h2>Correct Words ({correctWords.length})</h2>
+          <ul>
+            {correctWords.map((word, index) => (
+              <li key={index} onClick={() => handleWordClick(word)}>
+                {word.word}
               </li>
             ))}
           </ul>
