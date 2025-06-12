@@ -45,6 +45,7 @@ function App() {
   const [selectedWord, setSelectedWord] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
+  const [groupSectionOpen, setGroupSectionOpen] = useState(true);
 
   const getAvailableWords = () => {
     let words = [];
@@ -158,25 +159,38 @@ function App() {
         <h1>Vocab Game</h1>
 
         <div className="group-selection">
-          <h3>Select Word Groups:</h3>
-          <div className="group-buttons">
-            {Object.keys(ALL_GROUPS).map((groupName) => (
-              <button
-                key={groupName}
-                className={`group-button ${
-                  selectedGroups.includes(groupName) ? "selected" : ""
-                }`}
-                onClick={() => handleGroupToggle(groupName)}
-              >
-                {groupName}
-              </button>
-            ))}
-          </div>
-          <p className="group-info">
-            {selectedGroups.length === 0
-              ? "No groups selected - words will be chosen from all groups"
-              : `Selected groups: ${selectedGroups.join(", ")}`}
-          </p>
+          <h3
+            onClick={() => setGroupSectionOpen(!groupSectionOpen)}
+            style={{ cursor: "pointer" }}
+          >
+            Select Word Groups
+            <span style={{ marginLeft: "8px" }}>
+              {groupSectionOpen ? "▲" : "▼"}
+            </span>
+          </h3>
+
+          {groupSectionOpen && (
+            <>
+              <div className="group-buttons">
+                {Object.keys(ALL_GROUPS).map((groupName) => (
+                  <button
+                    key={groupName}
+                    className={`group-button ${
+                      selectedGroups.includes(groupName) ? "selected" : ""
+                    }`}
+                    onClick={() => handleGroupToggle(groupName)}
+                  >
+                    {groupName}
+                  </button>
+                ))}
+              </div>
+              <p className="group-info">
+                {selectedGroups.length === 0
+                  ? "No groups selected - words will be chosen from all groups"
+                  : `Selected groups: ${selectedGroups.join(", ")}`}
+              </p>
+            </>
+          )}
         </div>
 
         {gameComplete ? (
