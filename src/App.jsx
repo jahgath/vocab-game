@@ -167,11 +167,11 @@ function App() {
     loadNewWord();
   }, [selectedGroups, gameMode]);
 
-  // useEffect(() => {
-  //   if (availableWords.length > 0) {
-  //     loadNewWord();
-  //   }
-  // }, [availableWords]);
+  useEffect(() => {
+    if (availableWords.length > 0) {
+      loadNewWord();
+    }
+  }, [availableWords]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
