@@ -67,6 +67,7 @@ function App() {
   const [groupSectionOpen, setGroupSectionOpen] = useState(true);
   const [gameMode, setGameMode] = useState("type"); // "type" or "mcq"
   const [mcqOptions, setMcqOptions] = useState([]);
+  const [selectedMcqOption, setSelectedMcqOption] = useState(null);
 
   const getAvailableWords = () => {
     let words = [];
@@ -127,6 +128,7 @@ function App() {
       setAskedWords((prev) => new Set([...prev, newWord.word]));
       if (gameMode === "mcq") {
         setMcqOptions(generateMcqOptions(newWord));
+        setSelectedMcqOption(null);
       }
     }
     setUserInput("");
@@ -179,6 +181,10 @@ function App() {
   };
 
   const handleMcqSelect = (selectedOption) => {
+    if (selectedMcqOption !== null) return;
+
+    setSelectedMcqOption(selectedOption);
+
     if (selectedOption === currentWord.word) {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
@@ -314,19 +320,31 @@ function App() {
               </form>
             ) : (
               <div className="mcq-options">
-                {mcqOptions.map((option, index) => (
-                  <button
-                    key={index}
-                    className="mcq-option"
-                    onClick={() => handleMcqSelect(option)}
-                  >
-                    {option}
-                  </button>
-                ))}
+                {mcqOptions.map((option, index) => {
+                  let buttonClass = "mcq-option";
+                  if (selectedMcqOption !== null) {
+                    if (option === currentWord.word) {
+                      buttonClass += " correct";
+                    } else if (option === selectedMcqOption) {
+                      buttonClass += " incorrect";
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={index}
+                      className={buttonClass}
+                      onClick={() => handleMcqSelect(option)}
+                      disabled={selectedMcqOption !== null}
+                    >
+                      {option}
+                    </button>
+                  );
+                })}
               </div>
             )}
 
-            {feedback && (
+            {gameMode === "type" && feedback && (
               <div
                 className={`feedback ${
                   feedback.includes("Correct") ? "correct" : "incorrect"
