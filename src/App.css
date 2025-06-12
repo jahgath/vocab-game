@@ -91,10 +91,14 @@
 .word-input {
   padding: 0.8rem 1rem;
   font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 4px;
   width: 60%;
   transition: border-color 0.3s;
+  max-width: 600px;
+  padding: 1rem;
+  margin: 1rem auto;
+  border: 2px solid #4c51bf;
+  border-radius: 8px;
+  resize: vertical;
 }
 
 .word-input:focus {
@@ -111,6 +115,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  align-self: center;
 }
 
 .submit-btn:hover {
@@ -549,4 +554,85 @@
     padding: 0.4rem 1.2rem;
     font-size: 0.9rem;
   }
+}
+
+.meaning-input {
+  width: 100%;
+  max-width: 600px;
+  height: 100px;
+  padding: 1rem;
+  margin: 1rem auto;
+  border: 2px solid #4c51bf;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+  max-height: 200px;
+}
+
+.meaning-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.similarity-meter {
+  width: 100%;
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.similarity-fill {
+  height: 100%;
+  background-color: #48bb78;
+  border-radius: 4px;
+  transition: width 0.5s ease-in-out;
+}
+
+.feedback.incorrect .similarity-fill {
+  background-color: #f56565;
+}
+
+@media (max-width: 480px) {
+  .meaning-input {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+}
+
+.clue-section {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clue-button {
+  background: transparent;
+  border: 2px solid #4c51bf;
+  color: #4c51bf;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.clue-button:hover {
+  background: #4c51bf;
+  color: white;
+}
+
+.clue-text {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: #f8f8f8;
+  max-width: 600px;
+  margin: 0 auto;
 }

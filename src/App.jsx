@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ALL_GROUPS } from "./constants/words";
+import stringSimilarity from "string-similarity";
 import "./App.css";
 
 function Modal({ word, meanings, onClose }) {
@@ -65,12 +66,14 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
   const [groupSectionOpen, setGroupSectionOpen] = useState(true);
-  const [gameMode, setGameMode] = useState("type"); // "type" or "mcq"
+  const [gameMode, setGameMode] = useState("word"); // "word", "mcq-word", "mcq-meaning", or "meaning"
   const [mcqOptions, setMcqOptions] = useState([]);
   const [selectedMcqOption, setSelectedMcqOption] = useState(null);
   const [incorrectSortDesc, setIncorrectSortDesc] = useState(true);
   const [correctSortDesc, setCorrectSortDesc] = useState(true);
   const [disableInput, setDisableInput] = useState(false);
+  const [similarityScore, setSimilarityScore] = useState(null);
+  const [showClue, setShowClue] = useState(false);
 
   const totalWords = availableWords.length;
   const wordsLeft = totalWords - askedWords.size;
@@ -113,37 +116,63 @@ function App() {
   };
 
   const generateMcqOptions = (correctWord) => {
-    // Get all unique words except the correct one
-    const allWords = Array.from(
-      new Set(availableWords.map((w) => w.word))
-    ).filter((w) => w !== correctWord.word);
+    if (gameMode === "mcq-word") {
+      // Get all unique words except the correct one
+      const allWords = Array.from(
+        new Set(availableWords.map((w) => w.word))
+      ).filter((w) => w !== correctWord.word);
 
-    // Randomly select 3 words
-    const wrongOptions = [];
-    while (wrongOptions.length < 3) {
-      const randomIndex = Math.floor(Math.random() * allWords.length);
-      const word = allWords[randomIndex];
-      if (!wrongOptions.includes(word)) {
-        wrongOptions.push(word);
+      // Randomly select 3 words
+      const wrongOptions = [];
+      while (wrongOptions.length < 3) {
+        const randomIndex = Math.floor(Math.random() * allWords.length);
+        const word = allWords[randomIndex];
+        if (!wrongOptions.includes(word)) {
+          wrongOptions.push(word);
+        }
       }
-    }
 
-    // Add correct word and shuffle
-    const options = [...wrongOptions, correctWord.word];
-    for (let i = options.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [options[i], options[j]] = [options[j], options[i]];
-    }
+      // Add correct word and shuffle
+      const options = [...wrongOptions, correctWord.word];
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
 
-    return options;
+      return options;
+    } else if (gameMode === "mcq-meaning") {
+      // Get all unique meanings except the correct one
+      const allWords = availableWords.filter(
+        (w) => w.word !== correctWord.word
+      );
+      const wrongOptions = [];
+      while (wrongOptions.length < 3) {
+        const randomIndex = Math.floor(Math.random() * allWords.length);
+        const meaning = allWords[randomIndex].meaning;
+        if (!wrongOptions.includes(meaning)) {
+          wrongOptions.push(meaning);
+        }
+      }
+
+      // Add correct meaning and shuffle
+      const options = [...wrongOptions, correctWord.meaning];
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+
+      return options;
+    }
   };
 
   const loadNewWord = () => {
     const newWord = getRandomWord();
     setCurrentWord(newWord);
-    if (gameMode === "mcq" && newWord) {
-      setMcqOptions(generateMcqOptions(newWord));
-      setSelectedMcqOption(null);
+    if (newWord) {
+      if (gameMode === "mcq-word" || gameMode === "mcq-meaning") {
+        setMcqOptions(generateMcqOptions(newWord));
+        setSelectedMcqOption(null);
+      }
     }
     setUserInput("");
     setFeedback("");
@@ -206,16 +235,23 @@ function App() {
 
   const handleMcqSelect = (selectedOption) => {
     if (selectedMcqOption !== null) return;
-
     setSelectedMcqOption(selectedOption);
 
-    if (selectedOption === currentWord.word) {
+    const isCorrect =
+      gameMode === "mcq-word"
+        ? selectedOption === currentWord.word
+        : selectedOption === currentWord.meaning;
+
+    if (isCorrect) {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
-      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
+      setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(loadNewWord, 1500);
     } else {
-      let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
+      let feedbackMessage =
+        gameMode === "mcq-word"
+          ? `Incorrect. The correct word was "${currentWord.word}"`
+          : `Incorrect. The correct meaning was "${currentWord.meaning}"`;
       setFeedback(feedbackMessage);
       setIncorrectWords((prev) => [
         ...prev,
@@ -224,7 +260,7 @@ function App() {
           userGuess: selectedOption,
         },
       ]);
-      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
+      setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(loadNewWord, 2500);
     }
   };
@@ -260,6 +296,87 @@ function App() {
     setShowModal(true);
   };
 
+  const handleMeaningSubmit = (e) => {
+    e.preventDefault();
+    if (disableInput) return;
+    setDisableInput(true);
+
+    const userMeaning = userInput.toLowerCase().trim();
+    const correctMeaning = currentWord.meaning.toLowerCase().trim();
+    const correctWord = currentWord.word.toLowerCase().trim();
+    const synonyms = currentWord.synonyms.map((s) => s.toLowerCase().trim());
+
+    // Compare with meaning
+    const similarityMeaning = stringSimilarity.compareTwoStrings(
+      userMeaning,
+      correctMeaning
+    );
+
+    console.log("similarityMeaning", similarityMeaning);
+    console.log("correctMeaning", correctMeaning);
+    console.log("userMeaning", userMeaning);
+    console.log("correctWord", correctWord);
+    console.log("synonyms", synonyms);
+    console.log("userInput", userInput);
+    console.log("currentWord", currentWord);
+
+    // Compare with the actual word (in case user entered the definition instead of word)
+    const similarityWord = stringSimilarity.compareTwoStrings(
+      userMeaning,
+      correctWord
+    );
+
+    // Compare with each synonym, and get the highest match
+    const synonymScores = synonyms.map((syn) =>
+      stringSimilarity.compareTwoStrings(userMeaning, syn)
+    );
+    const maxSynonymScore = Math.max(...synonymScores, 0);
+
+    // Determine best match among the 3 comparisons
+    const bestSimilarity = Math.max(
+      similarityMeaning,
+      similarityWord,
+      maxSynonymScore
+    );
+    setSimilarityScore(bestSimilarity);
+
+    // Consider it correct if similarity is above 0.6 (60% similar)
+    if (bestSimilarity >= 0.5) {
+      setFeedback(
+        `Correct! (${Math.round(
+          bestSimilarity * 100
+        )}% match)\nActual meaning: ${currentWord.meaning}`
+      );
+      setCorrectWords((prev) => [...prev, currentWord]);
+      setAskedWords((prev) => new Set([...prev, currentWord.word]));
+      setTimeout(() => {
+        setDisableInput(false);
+        setSimilarityScore(null);
+        loadNewWord();
+      }, 2500);
+    } else {
+      setFeedback(
+        `Not quite right. (${Math.round(
+          bestSimilarity * 100
+        )}% match)\nActual meaning: ${currentWord.meaning}`
+      );
+      setIncorrectWords((prev) => [
+        ...prev,
+        {
+          ...currentWord,
+          userGuess: userInput,
+          similarity: bestSimilarity,
+        },
+      ]);
+      setAskedWords((prev) => new Set([...prev, currentWord.word]));
+      setTimeout(() => {
+        setDisableInput(false);
+        setSimilarityScore(null);
+        loadNewWord();
+      }, 3500);
+    }
+  };
+
   if (!currentWord && !gameComplete) return <div>Loading...</div>;
 
   return (
@@ -269,16 +386,34 @@ function App() {
 
         <div className="game-mode-toggle">
           <button
-            className={`mode-button ${gameMode === "type" ? "selected" : ""}`}
-            onClick={() => setGameMode("type")}
+            className={`mode-button ${gameMode === "word" ? "selected" : ""}`}
+            onClick={() => setGameMode("word")}
           >
-            Type
+            Word
           </button>
           <button
-            className={`mode-button ${gameMode === "mcq" ? "selected" : ""}`}
-            onClick={() => setGameMode("mcq")}
+            className={`mode-button ${
+              gameMode === "mcq-word" ? "selected" : ""
+            }`}
+            onClick={() => setGameMode("mcq-word")}
           >
-            MCQ
+            MCQ - Word
+          </button>
+          <button
+            className={`mode-button ${
+              gameMode === "mcq-meaning" ? "selected" : ""
+            }`}
+            onClick={() => setGameMode("mcq-meaning")}
+          >
+            MCQ - Meaning
+          </button>
+          <button
+            className={`mode-button ${
+              gameMode === "meaning" ? "selected" : ""
+            }`}
+            onClick={() => setGameMode("meaning")}
+          >
+            Meaning (BETA)
           </button>
         </div>
 
@@ -335,11 +470,36 @@ function App() {
         ) : (
           <>
             <div className="meaning-box">
-              <h2>Meaning:</h2>
-              <p>{currentWord.meaning}</p>
+              <h2>
+                {gameMode === "meaning" || gameMode === "mcq-meaning"
+                  ? "Word:"
+                  : "Meaning:"}
+              </h2>
+              <p>
+                {gameMode === "meaning" || gameMode === "mcq-meaning"
+                  ? currentWord.word
+                  : currentWord.meaning}
+              </p>
+              {gameMode === "meaning" && (
+                <div className="clue-section">
+                  <button
+                    className="clue-button"
+                    onClick={() => setShowClue(!showClue)}
+                  >
+                    {showClue ? "Hide Clue" : "Show Clue"}
+                  </button>
+                  {showClue &&
+                    currentWord.examples &&
+                    currentWord.examples.length > 0 && (
+                      <p className="clue-text">
+                        Example: {currentWord.examples[0]}
+                      </p>
+                    )}
+                </div>
+              )}
             </div>
 
-            {gameMode === "type" ? (
+            {gameMode === "word" && (
               <form onSubmit={handleSubmit} className="word-form">
                 <input
                   type="text"
@@ -357,12 +517,18 @@ function App() {
                   Submit
                 </button>
               </form>
-            ) : (
+            )}
+
+            {(gameMode === "mcq-word" || gameMode === "mcq-meaning") && (
               <div className="mcq-options">
                 {mcqOptions.map((option, index) => {
                   let buttonClass = "mcq-option";
                   if (selectedMcqOption !== null) {
-                    if (option === currentWord.word) {
+                    const correctOption =
+                      gameMode === "mcq-word"
+                        ? currentWord.word
+                        : currentWord.meaning;
+                    if (option === correctOption) {
                       buttonClass += " correct";
                     } else if (option === selectedMcqOption) {
                       buttonClass += " incorrect";
@@ -383,7 +549,26 @@ function App() {
               </div>
             )}
 
-            {gameMode === "type" && feedback && (
+            {gameMode === "meaning" && (
+              <form onSubmit={handleMeaningSubmit} className="word-form">
+                <textarea
+                  value={userInput}
+                  onChange={(e) => setUserInput(e.target.value)}
+                  placeholder="Enter the meaning of this word"
+                  className="meaning-input"
+                  disabled={disableInput}
+                />
+                <button
+                  type="submit"
+                  className="submit-btn"
+                  disabled={disableInput}
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+
+            {feedback && (
               <div
                 className={`feedback ${
                   feedback.includes("Correct") ? "correct" : "incorrect"
@@ -392,6 +577,14 @@ function App() {
                 {feedback.split("\n").map((line, index) => (
                   <p key={index}>{line}</p>
                 ))}
+                {similarityScore !== null && (
+                  <div className="similarity-meter">
+                    <div
+                      className="similarity-fill"
+                      style={{ width: `${similarityScore * 100}%` }}
+                    />
+                  </div>
+                )}
               </div>
             )}
           </>
