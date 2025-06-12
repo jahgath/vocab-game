@@ -68,9 +68,11 @@ function App() {
   const [gameMode, setGameMode] = useState("type"); // "type" or "mcq"
   const [mcqOptions, setMcqOptions] = useState([]);
   const [selectedMcqOption, setSelectedMcqOption] = useState(null);
-
   const [incorrectSortDesc, setIncorrectSortDesc] = useState(true);
   const [correctSortDesc, setCorrectSortDesc] = useState(true);
+
+  const totalWords = availableWords.length;
+  const wordsLeft = totalWords - askedWords.size;
 
   const toggleIncorrectSort = () => setIncorrectSortDesc(!incorrectSortDesc);
   const toggleCorrectSort = () => setCorrectSortDesc(!correctSortDesc);
@@ -138,12 +140,9 @@ function App() {
   const loadNewWord = () => {
     const newWord = getRandomWord();
     setCurrentWord(newWord);
-    if (newWord) {
-      setAskedWords((prev) => new Set([...prev, newWord.word]));
-      if (gameMode === "mcq") {
-        setMcqOptions(generateMcqOptions(newWord));
-        setSelectedMcqOption(null);
-      }
+    if (gameMode === "mcq" && newWord) {
+      setMcqOptions(generateMcqOptions(newWord));
+      setSelectedMcqOption(null);
     }
     setUserInput("");
     setFeedback("");
@@ -179,6 +178,7 @@ function App() {
     if (userInput.toLowerCase().trim() === currentWord.word.toLowerCase()) {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
+      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
       setTimeout(loadNewWord, 1500);
     } else {
       let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
@@ -190,6 +190,7 @@ function App() {
           userGuess: userInput,
         },
       ]);
+      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
       setTimeout(loadNewWord, 2500);
     }
   };
@@ -202,6 +203,7 @@ function App() {
     if (selectedOption === currentWord.word) {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
+      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
       setTimeout(loadNewWord, 1500);
     } else {
       let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
@@ -213,6 +215,7 @@ function App() {
           userGuess: selectedOption,
         },
       ]);
+      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
       setTimeout(loadNewWord, 2500);
     }
   };
@@ -302,6 +305,16 @@ function App() {
             </>
           )}
         </div>
+        {availableWords.length > 0 && (
+          <div className="word-count-summary">
+            <span>
+              <strong>Total Words:</strong> {totalWords}
+            </span>
+            <span>
+              <strong>Words Left:</strong> {wordsLeft}
+            </span>
+          </div>
+        )}
 
         {gameComplete ? (
           <div className="game-complete">
