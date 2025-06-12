@@ -65,6 +65,8 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
   const [groupSectionOpen, setGroupSectionOpen] = useState(true);
+  const [gameMode, setGameMode] = useState("type"); // "type" or "mcq"
+  const [mcqOptions, setMcqOptions] = useState([]);
 
   const getAvailableWords = () => {
     let words = [];
@@ -92,11 +94,40 @@ function App() {
     return unaskedWords[randomIndex];
   };
 
+  const generateMcqOptions = (correctWord) => {
+    // Get all unique words except the correct one
+    const allWords = Array.from(
+      new Set(availableWords.map((w) => w.word))
+    ).filter((w) => w !== correctWord.word);
+
+    // Randomly select 3 words
+    const wrongOptions = [];
+    while (wrongOptions.length < 3) {
+      const randomIndex = Math.floor(Math.random() * allWords.length);
+      const word = allWords[randomIndex];
+      if (!wrongOptions.includes(word)) {
+        wrongOptions.push(word);
+      }
+    }
+
+    // Add correct word and shuffle
+    const options = [...wrongOptions, correctWord.word];
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+
+    return options;
+  };
+
   const loadNewWord = () => {
     const newWord = getRandomWord();
     setCurrentWord(newWord);
     if (newWord) {
       setAskedWords((prev) => new Set([...prev, newWord.word]));
+      if (gameMode === "mcq") {
+        setMcqOptions(generateMcqOptions(newWord));
+      }
     }
     setUserInput("");
     setFeedback("");
@@ -118,7 +149,7 @@ function App() {
     setCorrectWords([]);
     setIncorrectWords([]);
     loadNewWord();
-  }, [selectedGroups]);
+  }, [selectedGroups, gameMode]);
 
   useEffect(() => {
     if (availableWords.length > 0) {
@@ -135,20 +166,31 @@ function App() {
       setTimeout(loadNewWord, 1500);
     } else {
       let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
-
-      if (currentWord.partOfSpeech) {
-        feedbackMessage += `\n${currentWord.partOfSpeech}`;
-      }
-      if (currentWord.exampleUse1) {
-        feedbackMessage += `\nExample: ${currentWord.exampleUse1}`;
-      }
-
       setFeedback(feedbackMessage);
       setIncorrectWords((prev) => [
         ...prev,
         {
           ...currentWord,
           userGuess: userInput,
+        },
+      ]);
+      setTimeout(loadNewWord, 2500);
+    }
+  };
+
+  const handleMcqSelect = (selectedOption) => {
+    if (selectedOption === currentWord.word) {
+      setFeedback("Correct!");
+      setCorrectWords((prev) => [...prev, currentWord]);
+      setTimeout(loadNewWord, 1500);
+    } else {
+      let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
+      setFeedback(feedbackMessage);
+      setIncorrectWords((prev) => [
+        ...prev,
+        {
+          ...currentWord,
+          userGuess: selectedOption,
         },
       ]);
       setTimeout(loadNewWord, 2500);
@@ -192,6 +234,21 @@ function App() {
     <div className="app-container">
       <div className="game-section">
         <h1>Vocab Game</h1>
+
+        <div className="game-mode-toggle">
+          <button
+            className={`mode-button ${gameMode === "type" ? "selected" : ""}`}
+            onClick={() => setGameMode("type")}
+          >
+            Type
+          </button>
+          <button
+            className={`mode-button ${gameMode === "mcq" ? "selected" : ""}`}
+            onClick={() => setGameMode("mcq")}
+          >
+            MCQ
+          </button>
+        </div>
 
         <div className="group-selection">
           <h3
@@ -242,18 +299,32 @@ function App() {
               <p>{currentWord.meaning}</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="word-form">
-              <input
-                type="text"
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                placeholder="Enter your guess"
-                className="word-input"
-              />
-              <button type="submit" className="submit-btn">
-                Submit
-              </button>
-            </form>
+            {gameMode === "type" ? (
+              <form onSubmit={handleSubmit} className="word-form">
+                <input
+                  type="text"
+                  value={userInput}
+                  onChange={(e) => setUserInput(e.target.value)}
+                  placeholder="Enter your guess"
+                  className="word-input"
+                />
+                <button type="submit" className="submit-btn">
+                  Submit
+                </button>
+              </form>
+            ) : (
+              <div className="mcq-options">
+                {mcqOptions.map((option, index) => (
+                  <button
+                    key={index}
+                    className="mcq-option"
+                    onClick={() => handleMcqSelect(option)}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {feedback && (
               <div
