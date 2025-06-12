@@ -13,11 +13,30 @@ function Modal({ word, meanings, onClose }) {
             {item.partOfSpeech && (
               <p className="modal-pos">Part of Speech: {item.partOfSpeech}</p>
             )}
-            {item.exampleUse1 && (
+            {item.examples && item.examples.length > 0 && (
               <div className="modal-example">
                 <h4>Examples:</h4>
-                <p>1. {item.exampleUse1}</p>
-                {item.exampleUse2 && <p>2. {item.exampleUse2}</p>}
+                {item.examples.map((example, i) => (
+                  <p key={i}>
+                    {i + 1}. {example}
+                  </p>
+                ))}
+              </div>
+            )}
+            {(item.synonyms || item.antonyms) && (
+              <div className="modal-synonyms-antonyms">
+                {item.synonyms && (
+                  <div className="modal-synonyms">
+                    <h4>Synonyms:</h4>
+                    <p>{item.synonyms.join(", ")}</p>
+                  </div>
+                )}
+                {item.antonyms && (
+                  <div className="modal-antonyms">
+                    <h4>Antonyms:</h4>
+                    <p>{item.antonyms.join(", ")}</p>
+                  </div>
+                )}
               </div>
             )}
             {index < meanings.length - 1 && (

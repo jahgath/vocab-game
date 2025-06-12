@@ -408,3 +408,30 @@
     padding: 1rem;
   }
 }
+
+.modal-synonyms-antonyms {
+  margin-top: 1rem;
+}
+
+.modal-synonyms,
+.modal-antonyms {
+  margin-top: 0.5rem;
+}
+
+.modal-synonyms h4 {
+  margin: 0.5rem 0;
+  color: green;
+  font-size: 0.9rem;
+}
+.modal-antonyms h4 {
+  margin: 0.5rem 0;
+  color: red;
+  font-size: 0.9rem;
+}
+
+.modal-synonyms p,
+.modal-antonyms p {
+  margin: 0.25rem 0;
+  color: #666;
+  font-style: italic;
+}
