@@ -69,6 +69,20 @@ function App() {
   const [mcqOptions, setMcqOptions] = useState([]);
   const [selectedMcqOption, setSelectedMcqOption] = useState(null);
 
+  const [incorrectSortDesc, setIncorrectSortDesc] = useState(true);
+  const [correctSortDesc, setCorrectSortDesc] = useState(true);
+
+  const toggleIncorrectSort = () => setIncorrectSortDesc(!incorrectSortDesc);
+  const toggleCorrectSort = () => setCorrectSortDesc(!correctSortDesc);
+
+  const sortedIncorrectWords = incorrectSortDesc
+    ? [...incorrectWords].reverse()
+    : [...incorrectWords];
+
+  const sortedCorrectWords = correctSortDesc
+    ? [...correctWords].reverse()
+    : [...correctWords];
+
   const getAvailableWords = () => {
     let words = [];
     if (selectedGroups.length === 0) {
@@ -361,9 +375,14 @@ function App() {
 
       <div className="results-container">
         <div className="incorrect-words">
-          <h2>Incorrect Words ({incorrectWords.length})</h2>
+          <h2>
+            Incorrect Words ({incorrectWords.length})
+            <button onClick={toggleIncorrectSort} className="sort-button">
+              {incorrectSortDesc ? "▼" : "▲"}
+            </button>
+          </h2>
           <ul>
-            {incorrectWords.map((attempt, index) => (
+            {sortedIncorrectWords.map((attempt, index) => (
               <li key={index} onClick={() => handleWordClick(attempt)}>
                 {attempt.word}
                 <span className="user-guess">
@@ -373,10 +392,16 @@ function App() {
             ))}
           </ul>
         </div>
+
         <div className="correct-words">
-          <h2>Correct Words ({correctWords.length})</h2>
+          <h2>
+            Correct Words ({correctWords.length})
+            <button onClick={toggleCorrectSort} className="sort-button">
+              {correctSortDesc ? "▼" : "▲"}
+            </button>
+          </h2>
           <ul>
-            {correctWords.map((word, index) => (
+            {sortedCorrectWords.map((word, index) => (
               <li key={index} onClick={() => handleWordClick(word)}>
                 {word.word}
               </li>
