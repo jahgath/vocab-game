@@ -1869,6 +1869,17 @@ export const GROUP_5 = [
     antonyms: ["strengthen", "support"],
   },
   {
+    word: "utterly",
+    meaning: "completely and without exception",
+    partOfSpeech: "Adverb",
+    examples: [
+      "She was utterly exhausted after the hike.",
+      "The film was utterly disappointing.",
+    ],
+    synonyms: ["completely", "totally", "entirely"],
+    antonyms: ["partially", "somewhat"],
+  },
+  {
     word: "weary",
     meaning: "feeling tired or exhausted",
     partOfSpeech: "Adjective",
