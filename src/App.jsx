@@ -70,6 +70,7 @@ function App() {
   const [selectedMcqOption, setSelectedMcqOption] = useState(null);
   const [incorrectSortDesc, setIncorrectSortDesc] = useState(true);
   const [correctSortDesc, setCorrectSortDesc] = useState(true);
+  const [disableInput, setDisableInput] = useState(false);
 
   const totalWords = availableWords.length;
   const wordsLeft = totalWords - askedWords.size;
@@ -174,12 +175,17 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (disableInput) return;
+    setDisableInput(true);
 
     if (userInput.toLowerCase().trim() === currentWord.word.toLowerCase()) {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
-      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
-      setTimeout(loadNewWord, 1500);
+      setAskedWords((prev) => new Set([...prev, currentWord.word]));
+      setTimeout(() => {
+        setDisableInput(false);
+        loadNewWord();
+      }, 1500);
     } else {
       let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
       setFeedback(feedbackMessage);
@@ -190,8 +196,11 @@ function App() {
           userGuess: userInput,
         },
       ]);
-      setAskedWords((prev) => new Set([...prev, currentWord.word])); // ✅ Add here
-      setTimeout(loadNewWord, 2500);
+      setAskedWords((prev) => new Set([...prev, currentWord.word]));
+      setTimeout(() => {
+        setDisableInput(false);
+        loadNewWord();
+      }, 2500);
     }
   };
 
@@ -338,8 +347,13 @@ function App() {
                   onChange={(e) => setUserInput(e.target.value)}
                   placeholder="Enter your guess"
                   className="word-input"
+                  disabled={disableInput}
                 />
-                <button type="submit" className="submit-btn">
+                <button
+                  type="submit"
+                  className="submit-btn"
+                  disabled={disableInput}
+                >
                   Submit
                 </button>
               </form>
