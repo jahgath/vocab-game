@@ -2,29 +2,29 @@ import { useState, useEffect } from "react";
 import { ALL_GROUPS } from "./constants/words";
 import "./App.css";
 
-function Modal({
-  word,
-  meaning,
-  onClose,
-  partOfSpeech,
-  exampleUse1,
-  exampleUse2,
-}) {
+function Modal({ word, meanings, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h3>{word}</h3>
-        <p className="modal-meaning">{meaning}</p>
-        {partOfSpeech && (
-          <p className="modal-pos">Part of Speech: {partOfSpeech}</p>
-        )}
-        {exampleUse1 && (
-          <div className="modal-example">
-            <h4>Examples:</h4>
-            <p>1. {exampleUse1}</p>
-            {exampleUse2 && <p>2. {exampleUse2}</p>}
+        {meanings.map((item, index) => (
+          <div key={index} className="modal-meaning-group">
+            <p className="modal-meaning">{item.meaning}</p>
+            {item.partOfSpeech && (
+              <p className="modal-pos">Part of Speech: {item.partOfSpeech}</p>
+            )}
+            {item.exampleUse1 && (
+              <div className="modal-example">
+                <h4>Examples:</h4>
+                <p>1. {item.exampleUse1}</p>
+                {item.exampleUse2 && <p>2. {item.exampleUse2}</p>}
+              </div>
+            )}
+            {index < meanings.length - 1 && (
+              <div className="modal-divider"></div>
+            )}
           </div>
-        )}
+        ))}
         <button onClick={onClose} className="modal-close">
           Close
         </button>
@@ -146,8 +146,24 @@ function App() {
     });
   };
 
+  const findAllMeanings = (word) => {
+    const allMeanings = [];
+    Object.values(ALL_GROUPS).forEach((group) => {
+      group.forEach((item) => {
+        if (item.word.toLowerCase() === word.toLowerCase()) {
+          allMeanings.push(item);
+        }
+      });
+    });
+    return allMeanings;
+  };
+
   const handleWordClick = (word) => {
-    setSelectedWord(word);
+    const allMeanings = findAllMeanings(word.word);
+    setSelectedWord({
+      word: word.word,
+      meanings: allMeanings,
+    });
     setShowModal(true);
   };
 
@@ -264,10 +280,7 @@ function App() {
       {showModal && (
         <Modal
           word={selectedWord.word}
-          meaning={selectedWord.meaning}
-          partOfSpeech={selectedWord.partOfSpeech}
-          exampleUse1={selectedWord.exampleUse1}
-          exampleUse2={selectedWord.exampleUse2}
+          meanings={selectedWord.meanings}
           onClose={() => {
             setShowModal(false);
             setSelectedWord(null);
