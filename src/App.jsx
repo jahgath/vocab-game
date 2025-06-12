@@ -276,9 +276,7 @@ function App() {
             style={{ cursor: "pointer" }}
           >
             Select Word Groups
-            <span style={{ marginLeft: "8px" }}>
-              {groupSectionOpen ? "▲" : "▼"}
-            </span>
+            <span className="sort-button">{groupSectionOpen ? "▲" : "▼"}</span>
           </h3>
 
           {groupSectionOpen && (
