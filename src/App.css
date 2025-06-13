@@ -1238,3 +1238,76 @@ textarea {
     font-size: 0.9rem;
   }
 }
+
+.mcq-synonyms-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mcq-synonyms-container .mcq-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.mcq-synonyms-container .mcq-option {
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.mcq-synonyms-container .mcq-option:hover {
+  border-color: #007bff;
+  background: #f8f9fa;
+}
+
+.mcq-synonyms-container .mcq-option.selected {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+.mcq-synonyms-container .submit-btn {
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.mcq-synonyms-container .submit-btn:hover {
+  background: #48bb78;
+}
+
+.mcq-synonyms-container .mcq-option.correct {
+  background: #48bb78;
+  color: white;
+  border-color: #48bb78;
+  pointer-events: none;
+}
+
+.mcq-synonyms-container .mcq-option.incorrect {
+  background: #f56565;
+  border-color: #f56565;
+  color: white;
+  pointer-events: none;
+}
+
+.mcq-synonyms-container .submit-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}

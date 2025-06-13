@@ -79,6 +79,7 @@ function App() {
   const [disableInput, setDisableInput] = useState(false);
   const [similarityScore, setSimilarityScore] = useState(null);
   const [showClue, setShowClue] = useState(false);
+  const [selectedMcqOptions, setSelectedMcqOptions] = useState(new Set());
 
   const totalWords = availableWords.length;
   const wordsLeft = totalWords - askedWords.size;
@@ -178,6 +179,50 @@ function App() {
       }
 
       return options;
+    } else if (gameMode === "mcq-synonyms" || gameMode === "mcq-antonyms") {
+      // Get all synonyms/antonyms from ALL_GROUPS
+      const allWords = new Set();
+      const isAntonyms = gameMode === "mcq-antonyms";
+      Object.values(ALL_GROUPS)
+        .flat()
+        .forEach((word) => {
+          if (isAntonyms ? word.antonyms : word.synonyms) {
+            (isAntonyms ? word.antonyms : word.synonyms).forEach((word) =>
+              allWords.add(word)
+            );
+          }
+        });
+
+      // Convert to array and remove current word's synonyms/antonyms
+      const correctWords = isAntonyms
+        ? correctWord.antonyms
+        : correctWord.synonyms;
+      const otherWords = Array.from(allWords).filter(
+        (word) => !correctWords.includes(word)
+      );
+
+      // Get current word's synonyms/antonyms
+      const correctOptions = correctWords || [];
+
+      // Select random wrong options
+      const wrongOptions = [];
+      const numWrongOptions = 9 - correctOptions.length;
+      while (wrongOptions.length < numWrongOptions) {
+        const randomIndex = Math.floor(Math.random() * otherWords.length);
+        const word = otherWords[randomIndex];
+        if (!wrongOptions.includes(word)) {
+          wrongOptions.push(word);
+        }
+      }
+
+      // Combine and shuffle all options
+      const options = [...correctOptions, ...wrongOptions];
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+
+      return options;
     }
   };
 
@@ -185,7 +230,12 @@ function App() {
     const newWord = getRandomWord();
     setCurrentWord(newWord);
     if (newWord) {
-      if (gameMode === "mcq-word" || gameMode === "mcq-meaning") {
+      if (
+        gameMode === "mcq-word" ||
+        gameMode === "mcq-meaning" ||
+        gameMode === "mcq-synonyms" ||
+        gameMode === "mcq-antonyms"
+      ) {
         setMcqOptions(generateMcqOptions(newWord));
         setSelectedMcqOption(null);
       }
@@ -510,6 +560,14 @@ function App() {
             </button>
             <button
               className={`mode-button ${
+                gameMode === "meaning" ? "selected" : ""
+              }`}
+              onClick={() => setGameMode("meaning")}
+            >
+              Meaning (BETA)
+            </button>
+            <button
+              className={`mode-button ${
                 gameMode === "mcq-word" ? "selected" : ""
               }`}
               onClick={() => setGameMode("mcq-word")}
@@ -526,12 +584,21 @@ function App() {
             </button>
             <button
               className={`mode-button ${
-                gameMode === "meaning" ? "selected" : ""
+                gameMode === "mcq-synonyms" ? "selected" : ""
               }`}
-              onClick={() => setGameMode("meaning")}
+              onClick={() => setGameMode("mcq-synonyms")}
             >
-              Meaning (BETA)
+              MCQ - Synonyms
             </button>
+            <button
+              className={`mode-button ${
+                gameMode === "mcq-antonyms" ? "selected" : ""
+              }`}
+              onClick={() => setGameMode("mcq-antonyms")}
+            >
+              MCQ - Antonyms
+            </button>
+
             <button
               className={`mode-button ${
                 gameMode === "antonyms" ? "selected" : ""
@@ -622,14 +689,18 @@ function App() {
                 <span className="word-meaning-label">
                   {gameMode === "meaning" ||
                   gameMode === "mcq-meaning" ||
-                  gameMode === "antonyms"
+                  gameMode === "antonyms" ||
+                  gameMode === "mcq-synonyms" ||
+                  gameMode === "mcq-antonyms"
                     ? "Word:"
                     : "Meaning:"}
                 </span>
                 <span className="word-meaning-text">
                   {gameMode === "meaning" ||
                   gameMode === "mcq-meaning" ||
-                  gameMode === "antonyms"
+                  gameMode === "antonyms" ||
+                  gameMode === "mcq-synonyms" ||
+                  gameMode === "mcq-antonyms"
                     ? currentWord.word
                     : currentWord.meaning}
                 </span>
@@ -739,6 +810,116 @@ function App() {
                   Submit
                 </button>
               </form>
+            )}
+
+            {(gameMode === "mcq-synonyms" || gameMode === "mcq-antonyms") && (
+              <div className="mcq-synonyms-container">
+                <div className="mcq-options">
+                  {mcqOptions.map((option, index) => {
+                    const isSelected = selectedMcqOptions.has(option);
+                    const correctWords = new Set(
+                      gameMode === "mcq-antonyms"
+                        ? currentWord.antonyms
+                        : currentWord.synonyms
+                    );
+                    let buttonClass = "mcq-option";
+
+                    // Only show feedback colors after submission (when feedback is shown)
+                    if (feedback) {
+                      if (correctWords.has(option)) {
+                        buttonClass += " correct";
+                      } else if (isSelected) {
+                        buttonClass += " incorrect";
+                      }
+                    } else if (isSelected) {
+                      buttonClass += " selected";
+                    }
+
+                    return (
+                      <button
+                        key={index}
+                        className={buttonClass}
+                        onClick={() => {
+                          if (!feedback) {
+                            // Only allow selection before submission
+                            setSelectedMcqOptions((prev) => {
+                              const newSet = new Set(prev);
+                              if (isSelected) {
+                                newSet.delete(option);
+                              } else {
+                                newSet.add(option);
+                              }
+                              return newSet;
+                            });
+                          }
+                        }}
+                      >
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  className="submit-btn"
+                  disabled={feedback !== ""} // Disable submit button after submission
+                  onClick={() => {
+                    const correctWords = new Set(
+                      gameMode === "mcq-antonyms"
+                        ? currentWord.antonyms
+                        : currentWord.synonyms
+                    );
+                    const selectedOptions = Array.from(selectedMcqOptions);
+
+                    // Check if all selected options are correct
+                    const allCorrect = selectedOptions.every((opt) =>
+                      correctWords.has(opt)
+                    );
+                    // Check if all correct words were selected
+                    const allSelected = Array.from(correctWords).every((word) =>
+                      selectedMcqOptions.has(word)
+                    );
+
+                    if (allCorrect && allSelected) {
+                      setFeedback(
+                        `Correct! You found all the ${
+                          gameMode === "mcq-antonyms" ? "antonyms" : "synonyms"
+                        }: ${Array.from(correctWords).join(", ")}`
+                      );
+                      setCorrectWords((prev) => [...prev, currentWord]);
+                      handleCorrectAnswer(currentWord);
+                    } else {
+                      setFeedback(
+                        `Incorrect. The correct ${
+                          gameMode === "mcq-antonyms" ? "antonyms" : "synonyms"
+                        } were: ${Array.from(correctWords).join(", ")}`
+                      );
+                      setIncorrectWords((prev) => [
+                        ...prev,
+                        {
+                          ...currentWord,
+                          userGuess: Array.from(selectedMcqOptions).join(", "),
+                        },
+                      ]);
+                      updateIncorrectWordsGroup(
+                        (prev) => new Set([...prev, currentWord])
+                      );
+                    }
+
+                    setAskedWords(
+                      (prev) => new Set([...prev, currentWord.word])
+                    );
+
+                    // Move to next word after delay
+                    setTimeout(() => {
+                      setFeedback("");
+                      setSelectedMcqOptions(new Set());
+                      loadNewWord();
+                    }, 2500);
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
             )}
 
             {feedback && (
