@@ -352,10 +352,15 @@ function App() {
     const synonyms = currentWord.synonyms.map((s) => s.toLowerCase().trim());
 
     // Compare with meaning
-    const correctParts = correctMeaning.split(";").map((s) => s.trim());
+    const correctParts = correctMeaning
+      .split(/;|\/|\bor\b/)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0); // optional: remove empty strings
+
     const scores = correctParts.map((part) =>
       stringSimilarity.compareTwoStrings(userMeaning, part)
     );
+
     const similarityMeaning = Math.max(...scores);
 
     // Compare with the actual word (in case user entered the definition instead of word)
