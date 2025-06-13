@@ -358,14 +358,6 @@ function App() {
     );
     const similarityMeaning = Math.max(...scores);
 
-    console.log("similarityMeaning", similarityMeaning);
-    console.log("correctMeaning", correctMeaning);
-    console.log("userMeaning", userMeaning);
-    console.log("correctWord", correctWord);
-    console.log("synonyms", synonyms);
-    console.log("userInput", userInput);
-    console.log("currentWord", currentWord);
-
     // Compare with the actual word (in case user entered the definition instead of word)
     const similarityWord = stringSimilarity.compareTwoStrings(
       userMeaning,
