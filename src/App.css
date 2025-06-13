@@ -193,6 +193,7 @@ body {
   margin: 0.5rem 0 0;
   font-size: 1.1rem;
   color: #666;
+  font-style: italic;
 }
 
 .word-form {
@@ -904,6 +905,8 @@ body {
   background-color: #f8f9fa;
   border-radius: 8px;
   margin-bottom: 1rem;
+  text-align: center;
+  justify-content: center;
 }
 
 .word-meaning-label {
@@ -914,106 +917,70 @@ body {
 }
 
 .word-meaning-text {
-  color: #4c51bf;
+  color: #333;
   font-size: 1.1rem;
   flex: 1;
+  text-align: center;
+}
+
+.meaning-input {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 2px solid #4c51bf;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.clue-button {
+  background: transparent;
+  border: 2px solid #4c51bf;
+  color: #4c51bf;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.clue-button:hover {
+  background: #4c51bf;
+  color: white;
 }
 
 @media (max-width: 768px) {
-  .game-section {
-    padding: 1rem;
-    gap: 1rem;
+  .meaning-input {
+    min-height: 100px;
     width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  .card {
-    padding: 1rem;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  .mode-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    min-width: 100px;
-  }
-
-  .game-mode-card .game-mode-toggle {
-    gap: 0.5rem;
-  }
-
-  .group-card .group-buttons {
-    gap: 0.5rem;
-  }
-
-  .group-button {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    flex: 1;
-    min-width: 80px;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    margin: 0.75rem 0;
   }
 
   .word-meaning-display {
     padding: 0.75rem;
     gap: 0.75rem;
+    flex-direction: column;
   }
 
-  .word-meaning-label,
-  .word-meaning-text {
+  .word-meaning-label {
     font-size: 1rem;
   }
 
-  .mcq-options {
-    width: 100%;
-    max-width: 100%;
-    margin: 1rem 0;
-    padding: 0;
-  }
-
-  .mcq-option {
-    padding: 0.75rem;
-    font-size: 0.9rem;
-    min-height: 44px;
-  }
-
-  .word-input,
-  .meaning-input {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 0.95rem;
-  }
-
-  .submit-btn {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .word-form {
-    padding: 0;
-  }
-
-  .incorrect-words-card ul,
-  .correct-words-card ul {
-    max-height: 200px;
+  .word-meaning-text {
+    font-size: 1rem;
+    padding: 0.5rem 0;
   }
 }
 
 @media (max-width: 480px) {
-  .game-section {
-    padding: 0.75rem;
-  }
-
-  .card {
-    padding: 0.75rem;
-  }
-
-  .mode-button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-    min-width: 80px;
+  .meaning-input {
+    min-height: 80px;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
   }
 
   .word-meaning-display {
@@ -1024,27 +991,6 @@ body {
   .word-meaning-label,
   .word-meaning-text {
     font-size: 0.95rem;
-  }
-
-  .group-button {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.85rem;
-  }
-
-  .mcq-option {
-    padding: 0.6rem;
-    font-size: 0.85rem;
-  }
-
-  .word-input,
-  .meaning-input {
-    padding: 0.6rem;
-    font-size: 0.9rem;
-  }
-
-  .submit-btn {
-    padding: 0.6rem;
-    font-size: 0.9rem;
   }
 }
 
@@ -1158,7 +1104,7 @@ textarea {
 }
 
 .word-meaning-text {
-  color: #4c51bf;
+  color: #333;
   font-size: 1.1rem;
   flex: 1;
 }
