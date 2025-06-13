@@ -159,6 +159,7 @@ body {
 
 .incorrect-words-card li,
 .correct-words-card li {
+  color: #333;
   padding: 0.8rem;
   border-bottom: 1px solid #eee;
   cursor: pointer;
