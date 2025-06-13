@@ -515,15 +515,15 @@ function App() {
                   </button>
                 )}
               </div>
-              <p className="group-info">
-                {selectedGroups.length === 0
-                  ? "All groups selected"
-                  : `${selectedGroups.length} group${
-                      selectedGroups.length === 1 ? "" : "s"
-                    } selected`}
-              </p>
             </>
           )}
+          <p className="group-info">
+            {selectedGroups.length === 0
+              ? "All groups selected"
+              : `${selectedGroups.length} group${
+                  selectedGroups.length === 1 ? "" : "s"
+                } selected`}
+          </p>
         </div>
 
         {availableWords.length > 0 && (

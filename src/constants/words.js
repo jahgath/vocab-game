@@ -3004,6 +3004,352 @@ export const GROUP_8 = [
   },
 ];
 
+export const GROUP_9 = [
+  {
+    word: "boorish",
+    meaning: "rude or unrefined in manners or behavior",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His boorish behavior at the dinner table embarrassed everyone.",
+      "She found his boorish remarks completely inappropriate.",
+    ],
+    synonyms: ["uncouth", "crude", "insensitive"],
+    antonyms: ["polite", "refined", "graceful"],
+  },
+  {
+    word: "brook",
+    meaning: "to tolerate or endure something, especially an annoyance",
+    partOfSpeech: "Verb",
+    examples: [
+      "She would not brook any criticism of her decision.",
+      "He brooked no delay in completing the project.",
+    ],
+    synonyms: ["tolerate", "endure", "allow"],
+    antonyms: ["reject", "refuse", "prohibit"],
+  },
+  {
+    word: "circumspect",
+    meaning:
+      "cautious or wary, especially when considering potential consequences",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She was circumspect in revealing too much personal information.",
+      "A circumspect approach was taken in the negotiations.",
+    ],
+    synonyms: ["cautious", "prudent", "wary"],
+    antonyms: ["reckless", "careless", "rash"],
+  },
+  {
+    word: "comity",
+    meaning: "a courteous harmony or mutual respect toward others",
+    partOfSpeech: "Noun",
+    examples: [
+      "International comity is essential for peace.",
+      "They maintained comity despite their differences.",
+    ],
+    synonyms: ["civility", "courtesy", "respect"],
+    antonyms: ["hostility", "rudeness", "discord"],
+  },
+  {
+    word: "commensurate",
+    meaning: "comparable in size, extent, or degree; proportionate",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The salary should be commensurate with experience.",
+      "Punishment must be commensurate with the crime.",
+    ],
+    synonyms: ["proportionate", "equal", "equivalent"],
+    antonyms: ["disproportionate", "unequal", "inappropriate"],
+  },
+  {
+    word: "cordial",
+    meaning: "characterized by warmth and sincerity",
+    partOfSpeech: "Adjective",
+    examples: [
+      "They exchanged cordial greetings.",
+      "She was cordial toward her former colleagues.",
+    ],
+    synonyms: ["warm", "friendly", "gracious"],
+    antonyms: ["hostile", "cold", "unfriendly"],
+  },
+  {
+    word: "deleterious",
+    meaning: "having a harmful effect",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The policy had a deleterious impact on the economy.",
+      "Smoking has deleterious effects on health.",
+    ],
+    synonyms: ["harmful", "damaging", "injurious"],
+    antonyms: ["beneficial", "helpful", "advantageous"],
+  },
+  {
+    word: "dichotomy",
+    meaning: "a split into two contrasting or opposite parts",
+    partOfSpeech: "Noun",
+    examples: [
+      "There is a clear dichotomy between theory and practice.",
+      "The book explores the dichotomy of good and evil.",
+    ],
+    synonyms: ["contrast", "division", "duality"],
+    antonyms: ["unity", "agreement", "harmony"],
+  },
+  {
+    word: "edify",
+    meaning: "enlighten or uplift through knowledge; teach",
+    partOfSpeech: "Verb",
+    examples: [
+      "The documentary aimed to edify its audience.",
+      "Stories that edify as well as entertain are rare.",
+    ],
+    synonyms: ["educate", "enlighten", "instruct"],
+    antonyms: ["mislead", "confuse", "misinform"],
+  },
+  {
+    word: "elicit",
+    meaning: "extract a reply or action; provoke",
+    partOfSpeech: "Verb",
+    examples: [
+      "The teacher's question elicited no response.",
+      "He elicited laughter with his jokes.",
+    ],
+    synonyms: ["evoke", "extract", "draw out"],
+    antonyms: ["suppress", "hide", "repress"],
+  },
+  {
+    word: "erudite",
+    meaning: "possessing great knowledge, typically from study or research",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She gave an erudite lecture on ancient philosophy.",
+      "The professor was known for his erudite writing.",
+    ],
+    synonyms: ["learned", "scholarly", "intellectual"],
+    antonyms: ["ignorant", "uneducated", "uninformed"],
+  },
+  {
+    word: "fecund",
+    meaning: "fertile or highly productive",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The fecund soil yielded a bountiful harvest.",
+      "Her fecund imagination produced numerous stories.",
+    ],
+    synonyms: ["fertile", "productive", "fruitful"],
+    antonyms: ["barren", "unproductive", "sterile"],
+  },
+  {
+    word: "feeble",
+    meaning: "weak; deficient in strength",
+    partOfSpeech: "Adjective",
+    examples: [
+      "He gave a feeble excuse for being late.",
+      "The patient’s pulse was feeble after the surgery.",
+    ],
+    synonyms: ["weak", "frail", "fragile"],
+    antonyms: ["strong", "robust", "powerful"],
+  },
+
+  {
+    word: "felicitous",
+    meaning: "well-suited or apt",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She made a felicitous remark during the meeting.",
+      "His choice of words was felicitous for the occasion.",
+    ],
+    synonyms: ["appropriate", "apt", "suitable"],
+    antonyms: ["awkward", "inappropriate", "unfitting"],
+  },
+  {
+    word: "felicitous",
+    meaning: "causing delight or satisfaction",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The song ended on a felicitous note.",
+      "Their reunion was a felicitous moment for the entire family.",
+    ],
+    synonyms: ["pleasing", "delightful", "charming"],
+    antonyms: ["unpleasant", "disagreeable", "disturbing"],
+  },
+  {
+    word: "forbear",
+    meaning: "refrain or abstain from doing something",
+    partOfSpeech: "Verb",
+    examples: [
+      "He decided to forbear from commenting further.",
+      "She could not forbear a smile.",
+    ],
+    synonyms: ["refrain", "withhold", "abstain"],
+    antonyms: ["indulge", "submit", "yield"],
+  },
+  {
+    word: "haphazard",
+    meaning: "lacking clear planning, order, or direction",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Their approach to the task was haphazard at best.",
+      "Books lay around the room in a haphazard fashion.",
+    ],
+    synonyms: ["random", "disorganized", "chaotic"],
+    antonyms: ["methodical", "organized", "systematic"],
+  },
+  {
+    word: "hodgepodge",
+    meaning: "a mixture or assortment of different things",
+    partOfSpeech: "Noun",
+    examples: [
+      "Her report was a hodgepodge of facts and opinions.",
+      "The museum was a hodgepodge of unrelated exhibits.",
+    ],
+    synonyms: ["jumble", "medley", "mishmash"],
+    antonyms: ["uniformity", "consistency", "order"],
+  },
+  {
+    word: "impede",
+    meaning: "obstruct or hinder progress",
+    partOfSpeech: "Verb",
+    examples: [
+      "Poor roads impede economic development.",
+      "The heavy rain impeded their progress.",
+    ],
+    synonyms: ["obstruct", "hinder", "block"],
+    antonyms: ["assist", "advance", "facilitate"],
+  },
+  {
+    word: "impetuous",
+    meaning: "rash or hasty in action or decision",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His impetuous actions got him into trouble.",
+      "She regretted her impetuous decision.",
+    ],
+    synonyms: ["reckless", "rash", "hasty"],
+    antonyms: ["cautious", "deliberate", "thoughtful"],
+  },
+  {
+    word: "irascible",
+    meaning: "easily angered or irritated",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The irascible old man shouted at the children.",
+      "Her irascible nature made her hard to work with.",
+    ],
+    synonyms: ["irritable", "short-tempered", "testy"],
+    antonyms: ["calm", "easygoing", "good-natured"],
+  },
+  {
+    word: "mercenary",
+    meaning: "motivated primarily by a desire for monetary or material gain",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His mercenary motives were obvious.",
+      "She viewed the deal as a purely mercenary endeavor.",
+    ],
+    synonyms: ["greedy", "money-minded", "selfish"],
+    antonyms: ["selfless", "generous", "altruistic"],
+  },
+  {
+    word: "meticulous",
+    meaning: "exhibiting great care to detail",
+    partOfSpeech: "Adjective",
+    examples: [
+      "He is meticulous about his work.",
+      "The report was meticulously prepared.",
+    ],
+    synonyms: ["careful", "precise", "thorough"],
+    antonyms: ["careless", "sloppy", "haphazard"],
+  },
+  {
+    word: "mordant",
+    meaning: "biting or sharply critical in thought or expression",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The critic's review was mordant but insightful.",
+      "She had a mordant wit.",
+    ],
+    synonyms: ["biting", "sarcastic", "acerbic"],
+    antonyms: ["gentle", "mild", "complimentary"],
+  },
+  {
+    word: "outstrip",
+    meaning: "surpass or do better than",
+    partOfSpeech: "Verb",
+    examples: [
+      "The new product quickly outstripped its competitors.",
+      "She outstripped all expectations.",
+    ],
+    synonyms: ["surpass", "exceed", "outperform"],
+    antonyms: ["fall behind", "lag", "trail"],
+  },
+  {
+    word: "precarious",
+    meaning: "uncertain and likely to cause danger",
+    partOfSpeech: "Adjective",
+    examples: [
+      "They were in a precarious financial position.",
+      "The ladder looked precarious against the wall.",
+    ],
+    synonyms: ["unstable", "risky", "uncertain"],
+    antonyms: ["safe", "secure", "stable"],
+  },
+  {
+    word: "quirky",
+    meaning: "unusual in an endearing or peculiar way",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She has a quirky sense of humor.",
+      "The café had a quirky interior design.",
+    ],
+    synonyms: ["eccentric", "peculiar", "offbeat"],
+    antonyms: ["conventional", "normal", "common"],
+  },
+  {
+    word: "repudiate",
+    meaning: "reject or refute",
+    partOfSpeech: "Verb",
+    examples: [
+      "He repudiated the allegations.",
+      "She publicly repudiated her former beliefs.",
+    ],
+    synonyms: ["reject", "deny", "disown"],
+    antonyms: ["accept", "endorse", "embrace"],
+  },
+  {
+    word: "tact",
+    meaning: "skill in handling difficult situations without causing offense",
+    partOfSpeech: "Noun",
+    examples: [
+      "She handled the criticism with tact.",
+      "Tact is essential in diplomacy.",
+    ],
+    synonyms: ["diplomacy", "discretion", "sensitivity"],
+    antonyms: ["bluntness", "insensitivity", "rudeness"],
+  },
+  {
+    word: "trifling",
+    meaning: "lacking significance or importance",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Don't waste time on trifling matters.",
+      "The cost is trifling compared to the benefits.",
+    ],
+    synonyms: ["insignificant", "minor", "petty"],
+    antonyms: ["important", "serious", "meaningful"],
+  },
+  {
+    word: "turbulent",
+    meaning: "full of conflict or chaos",
+    partOfSpeech: "Adjective",
+    examples: [
+      "They had a turbulent relationship.",
+      "The 1960s were a turbulent decade in history.",
+    ],
+    synonyms: ["chaotic", "stormy", "unsettled"],
+    antonyms: ["peaceful", "calm", "orderly"],
+  },
+];
+
 // Export all groups in an object for easy access
 export const ALL_GROUPS = {
   "Group 1": GROUP_1,
@@ -3014,4 +3360,5 @@ export const ALL_GROUPS = {
   "Group 6": GROUP_6,
   "Group 7": GROUP_7,
   "Group 8": GROUP_8,
+  "Group 9": GROUP_9,
 };
