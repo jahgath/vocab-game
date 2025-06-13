@@ -436,40 +436,43 @@ function App() {
       <div className="game-section">
         <h1>Vocab Game</h1>
 
-        <div className="game-mode-toggle">
-          <button
-            className={`mode-button ${gameMode === "word" ? "selected" : ""}`}
-            onClick={() => setGameMode("word")}
-          >
-            Word
-          </button>
-          <button
-            className={`mode-button ${
-              gameMode === "mcq-word" ? "selected" : ""
-            }`}
-            onClick={() => setGameMode("mcq-word")}
-          >
-            MCQ - Word
-          </button>
-          <button
-            className={`mode-button ${
-              gameMode === "mcq-meaning" ? "selected" : ""
-            }`}
-            onClick={() => setGameMode("mcq-meaning")}
-          >
-            MCQ - Meaning
-          </button>
-          <button
-            className={`mode-button ${
-              gameMode === "meaning" ? "selected" : ""
-            }`}
-            onClick={() => setGameMode("meaning")}
-          >
-            Meaning (BETA)
-          </button>
+        <div className="card game-mode-card">
+          <h3>Game Mode</h3>
+          <div className="game-mode-toggle">
+            <button
+              className={`mode-button ${gameMode === "word" ? "selected" : ""}`}
+              onClick={() => setGameMode("word")}
+            >
+              Word
+            </button>
+            <button
+              className={`mode-button ${
+                gameMode === "mcq-word" ? "selected" : ""
+              }`}
+              onClick={() => setGameMode("mcq-word")}
+            >
+              MCQ - Word
+            </button>
+            <button
+              className={`mode-button ${
+                gameMode === "mcq-meaning" ? "selected" : ""
+              }`}
+              onClick={() => setGameMode("mcq-meaning")}
+            >
+              MCQ - Meaning
+            </button>
+            <button
+              className={`mode-button ${
+                gameMode === "meaning" ? "selected" : ""
+              }`}
+              onClick={() => setGameMode("meaning")}
+            >
+              Meaning (BETA)
+            </button>
+          </div>
         </div>
 
-        <div className="group-selection">
+        <div className="card group-card">
           <h3
             onClick={() => setGroupSectionOpen(!groupSectionOpen)}
             style={{ cursor: "pointer" }}
@@ -522,6 +525,7 @@ function App() {
             </>
           )}
         </div>
+
         {availableWords.length > 0 && (
           <div className="word-count-summary">
             <span>
@@ -534,25 +538,27 @@ function App() {
         )}
 
         {gameComplete ? (
-          <div className="game-complete">
+          <div className="card game-complete">
             <h2>All words have been asked!</h2>
             <button onClick={resetGame} className="reset-button">
               Start Again
             </button>
           </div>
         ) : (
-          <>
+          <div className="card game-content-card">
             <div className="meaning-box">
-              <h2>
-                {gameMode === "meaning" || gameMode === "mcq-meaning"
-                  ? "Word:"
-                  : "Meaning:"}
-              </h2>
-              <p>
-                {gameMode === "meaning" || gameMode === "mcq-meaning"
-                  ? currentWord.word
-                  : currentWord.meaning}
-              </p>
+              <div className="word-meaning-display">
+                <span className="word-meaning-label">
+                  {gameMode === "meaning" || gameMode === "mcq-meaning"
+                    ? "Word:"
+                    : "Meaning:"}
+                </span>
+                <span className="word-meaning-text">
+                  {gameMode === "meaning" || gameMode === "mcq-meaning"
+                    ? currentWord.word
+                    : currentWord.meaning}
+                </span>
+              </div>
               {gameMode === "meaning" && (
                 <div className="clue-section">
                   <button
@@ -660,12 +666,10 @@ function App() {
                 )}
               </div>
             )}
-          </>
+          </div>
         )}
-      </div>
 
-      <div className="results-container">
-        <div className="incorrect-words">
+        <div className="card incorrect-words-card">
           <h2>
             Incorrect Words ({incorrectWords.length})
             <button onClick={toggleIncorrectSort} className="sort-button">
@@ -684,7 +688,7 @@ function App() {
           </ul>
         </div>
 
-        <div className="correct-words">
+        <div className="card correct-words-card">
           <h2>
             Correct Words ({correctWords.length})
             <button onClick={toggleCorrectSort} className="sort-button">
