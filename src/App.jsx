@@ -206,7 +206,7 @@ function App() {
 
       // Select random wrong options
       const wrongOptions = [];
-      const numWrongOptions = 9 - correctOptions.length;
+      const numWrongOptions = 8 - correctOptions.length;
       while (wrongOptions.length < numWrongOptions) {
         const randomIndex = Math.floor(Math.random() * otherWords.length);
         const word = otherWords[randomIndex];

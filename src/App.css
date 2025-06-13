@@ -1250,9 +1250,11 @@ textarea {
 
 .mcq-synonyms-container .mcq-options {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .mcq-synonyms-container .mcq-option {
@@ -1267,14 +1269,14 @@ textarea {
 }
 
 .mcq-synonyms-container .mcq-option:hover {
-  border-color: #007bff;
+  border-color: #4c51bf;
   background: #f8f9fa;
 }
 
 .mcq-synonyms-container .mcq-option.selected {
-  background: #007bff;
+  background: #646cff;
   color: white;
-  border-color: #0056b3;
+  border-color: #4c51bf;
 }
 
 .mcq-synonyms-container .submit-btn {
@@ -1310,4 +1312,21 @@ textarea {
 .mcq-synonyms-container .submit-btn:disabled {
   background: #6c757d;
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .mcq-synonyms-container .mcq-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .mcq-synonyms-container .mcq-options {
+    gap: 0.5rem;
+  }
+
+  .mcq-synonyms-container .mcq-option {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
 }
