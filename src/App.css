@@ -1281,7 +1281,7 @@ textarea {
   margin-top: 1rem;
   padding: 1rem 2rem;
   font-size: 1.1rem;
-  background: #48bb78;
+  background: #646cff;
   color: white;
   border: none;
   border-radius: 8px;
@@ -1290,7 +1290,7 @@ textarea {
 }
 
 .mcq-synonyms-container .submit-btn:hover {
-  background: #48bb78;
+  background: #4c51bf;
 }
 
 .mcq-synonyms-container .mcq-option.correct {
