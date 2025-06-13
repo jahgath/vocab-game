@@ -346,7 +346,70 @@ function App() {
     if (disableInput) return;
     setDisableInput(true);
 
-    const userMeaning = userInput.toLowerCase().trim();
+    const userAnswer = userInput.toLowerCase().trim();
+
+    if (gameMode === "antonyms") {
+      // Get antonyms array, handling cases where it might not exist
+      const antonyms =
+        currentWord.antonyms?.map((a) => a.toLowerCase().trim()) || [];
+
+      if (!antonyms.length) {
+        setFeedback("Sorry, no antonyms available for this word.");
+        setTimeout(() => {
+          setDisableInput(false);
+          loadNewWord();
+        }, 2000);
+        return;
+      }
+
+      // Compare with each antonym and get the highest match
+      const antonymScores = antonyms.map((ant) =>
+        stringSimilarity.compareTwoStrings(userAnswer, ant)
+      );
+      const bestSimilarity = Math.max(...antonymScores);
+      setSimilarityScore(bestSimilarity);
+
+      if (bestSimilarity >= 0.5) {
+        setFeedback(
+          `Correct! (${Math.round(
+            bestSimilarity * 100
+          )}% match)\nAntonyms: ${antonyms.join(", ")}`
+        );
+        setCorrectWords((prev) => [...prev, currentWord]);
+        handleCorrectAnswer(currentWord);
+        setAskedWords((prev) => new Set([...prev, currentWord.word]));
+        setTimeout(() => {
+          setDisableInput(false);
+          setSimilarityScore(null);
+          loadNewWord();
+        }, 2500);
+      } else {
+        setFeedback(
+          `Not quite right. (${Math.round(
+            bestSimilarity * 100
+          )}% match)\nAntonyms: ${antonyms.join(", ")}`
+        );
+        setIncorrectWords((prev) => [
+          ...prev,
+          {
+            ...currentWord,
+            userGuess: userInput,
+            similarity: bestSimilarity,
+          },
+        ]);
+        updateIncorrectWordsGroup((prev) => new Set([...prev, currentWord]));
+        setAskedWords((prev) => new Set([...prev, currentWord.word]));
+        setTimeout(() => {
+          setDisableInput(false);
+          setSimilarityScore(null);
+          loadNewWord();
+        }, 3500);
+      }
+      return;
+    }
+
+    // Original meaning mode logic
+    const userMeaning = userAnswer;
     const correctMeaning = currentWord.meaning.toLowerCase().trim();
     const correctWord = currentWord.word.toLowerCase().trim();
     const synonyms = currentWord.synonyms.map((s) => s.toLowerCase().trim());
@@ -355,7 +418,7 @@ function App() {
     const correctParts = correctMeaning
       .split(/;|\/|\bor\b/)
       .map((s) => s.trim())
-      .filter((s) => s.length > 0); // optional: remove empty strings
+      .filter((s) => s.length > 0);
 
     const scores = correctParts.map((part) =>
       stringSimilarity.compareTwoStrings(userMeaning, part)
@@ -469,6 +532,14 @@ function App() {
             >
               Meaning (BETA)
             </button>
+            <button
+              className={`mode-button ${
+                gameMode === "antonyms" ? "selected" : ""
+              }`}
+              onClick={() => setGameMode("antonyms")}
+            >
+              Antonyms (BETA)
+            </button>
           </div>
         </div>
 
@@ -549,12 +620,16 @@ function App() {
             <div className="meaning-box">
               <div className="word-meaning-display">
                 <span className="word-meaning-label">
-                  {gameMode === "meaning" || gameMode === "mcq-meaning"
+                  {gameMode === "meaning" ||
+                  gameMode === "mcq-meaning" ||
+                  gameMode === "antonyms"
                     ? "Word:"
                     : "Meaning:"}
                 </span>
                 <span className="word-meaning-text">
-                  {gameMode === "meaning" || gameMode === "mcq-meaning"
+                  {gameMode === "meaning" ||
+                  gameMode === "mcq-meaning" ||
+                  gameMode === "antonyms"
                     ? currentWord.word
                     : currentWord.meaning}
                 </span>
@@ -634,6 +709,25 @@ function App() {
                   value={userInput}
                   onChange={(e) => setUserInput(e.target.value)}
                   placeholder="Enter the meaning of this word"
+                  className="meaning-input"
+                  disabled={disableInput}
+                />
+                <button
+                  type="submit"
+                  className="submit-btn"
+                  disabled={disableInput}
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+
+            {gameMode === "antonyms" && (
+              <form onSubmit={handleMeaningSubmit} className="word-form">
+                <textarea
+                  value={userInput}
+                  onChange={(e) => setUserInput(e.target.value)}
+                  placeholder="Enter an antonym for this word"
                   className="meaning-input"
                   disabled={disableInput}
                 />
