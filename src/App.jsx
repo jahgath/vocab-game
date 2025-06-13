@@ -60,6 +60,11 @@ function App() {
   const [correctWords, setCorrectWords] = useState([]);
   const [incorrectWords, setIncorrectWords] = useState([]);
   const [selectedGroups, setSelectedGroups] = useState([]);
+  const [incorrectWordsGroup, setIncorrectWordsGroup] = useState(() => {
+    // Initialize from localStorage if available
+    const savedGroup = localStorage.getItem("incorrectWordsGroup");
+    return savedGroup ? new Set(JSON.parse(savedGroup)) : new Set();
+  });
   const [askedWords, setAskedWords] = useState(new Set());
   const [availableWords, setAvailableWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState(null);
@@ -95,15 +100,22 @@ function App() {
       words = Object.values(ALL_GROUPS).flat();
     } else {
       selectedGroups.forEach((groupName) => {
-        words = [...words, ...ALL_GROUPS[groupName]];
+        if (groupName === "Incorrect Words") {
+          words = [...words, ...Array.from(incorrectWordsGroup)];
+        } else {
+          words = [...words, ...ALL_GROUPS[groupName]];
+        }
       });
     }
     return words;
   };
 
   const getRandomWord = () => {
+    if (availableWords.length === 0) return null;
+
+    // Filter out words that have already been asked
     const unaskedWords = availableWords.filter(
-      (word) => !askedWords.has(word.word)
+      (word) => word && word.word && !askedWords.has(word.word)
     );
 
     if (unaskedWords.length === 0) {
@@ -117,9 +129,13 @@ function App() {
 
   const generateMcqOptions = (correctWord) => {
     if (gameMode === "mcq-word") {
-      // Get all unique words except the correct one
+      // Get all unique words from ALL_GROUPS except the correct one
       const allWords = Array.from(
-        new Set(availableWords.map((w) => w.word))
+        new Set(
+          Object.values(ALL_GROUPS)
+            .flat()
+            .map((w) => w.word)
+        )
       ).filter((w) => w !== correctWord.word);
 
       // Randomly select 3 words
@@ -141,10 +157,10 @@ function App() {
 
       return options;
     } else if (gameMode === "mcq-meaning") {
-      // Get all unique meanings except the correct one
-      const allWords = availableWords.filter(
-        (w) => w.word !== correctWord.word
-      );
+      // Get all unique meanings from ALL_GROUPS except the correct one
+      const allWords = Object.values(ALL_GROUPS)
+        .flat()
+        .filter((w) => w.word !== correctWord.word);
       const wrongOptions = [];
       while (wrongOptions.length < 3) {
         const randomIndex = Math.floor(Math.random() * allWords.length);
@@ -202,6 +218,23 @@ function App() {
     }
   }, [availableWords]);
 
+  const updateIncorrectWordsGroup = (newGroup) => {
+    setIncorrectWordsGroup(newGroup);
+    localStorage.setItem(
+      "incorrectWordsGroup",
+      JSON.stringify(Array.from(newGroup))
+    );
+  };
+
+  const handleCorrectAnswer = (word) => {
+    // Remove word from incorrect words group if it exists
+    updateIncorrectWordsGroup((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(word);
+      return newSet;
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (disableInput) return;
@@ -211,13 +244,13 @@ function App() {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
       setAskedWords((prev) => new Set([...prev, currentWord.word]));
+      handleCorrectAnswer(currentWord);
       setTimeout(() => {
         setDisableInput(false);
         loadNewWord();
       }, 1500);
     } else {
-      let feedbackMessage = `Incorrect. The correct word was "${currentWord.word}"`;
-      setFeedback(feedbackMessage);
+      setFeedback(`Incorrect. The correct word was "${currentWord.word}"`);
       setIncorrectWords((prev) => [
         ...prev,
         {
@@ -225,6 +258,8 @@ function App() {
           userGuess: userInput,
         },
       ]);
+      // Add to incorrect words group
+      updateIncorrectWordsGroup((prev) => new Set([...prev, currentWord]));
       setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(() => {
         setDisableInput(false);
@@ -246,6 +281,7 @@ function App() {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
       setAskedWords((prev) => new Set([...prev, currentWord.word]));
+      handleCorrectAnswer(currentWord);
       setTimeout(loadNewWord, 1500);
     } else {
       let feedbackMessage =
@@ -260,19 +296,28 @@ function App() {
           userGuess: selectedOption,
         },
       ]);
+      // Add to incorrect words group
+      updateIncorrectWordsGroup((prev) => new Set([...prev, currentWord]));
       setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(loadNewWord, 2500);
     }
   };
 
   const handleGroupToggle = (groupName) => {
-    setSelectedGroups((prev) => {
-      if (prev.includes(groupName)) {
-        return prev.filter((g) => g !== groupName);
-      } else {
-        return [...prev, groupName];
-      }
-    });
+    if (groupName === "Incorrect Words") {
+      // If selecting incorrect words group, clear other selections
+      setSelectedGroups(["Incorrect Words"]);
+    } else {
+      // If selecting another group, remove incorrect words from selection
+      setSelectedGroups((prev) => {
+        const newGroups = prev.filter((g) => g !== "Incorrect Words");
+        if (newGroups.includes(groupName)) {
+          return newGroups.filter((g) => g !== groupName);
+        } else {
+          return [...newGroups, groupName];
+        }
+      });
+    }
   };
 
   const findAllMeanings = (word) => {
@@ -307,10 +352,11 @@ function App() {
     const synonyms = currentWord.synonyms.map((s) => s.toLowerCase().trim());
 
     // Compare with meaning
-    const similarityMeaning = stringSimilarity.compareTwoStrings(
-      userMeaning,
-      correctMeaning
+    const correctParts = correctMeaning.split(";").map((s) => s.trim());
+    const scores = correctParts.map((part) =>
+      stringSimilarity.compareTwoStrings(userMeaning, part)
     );
+    const similarityMeaning = Math.max(...scores);
 
     console.log("similarityMeaning", similarityMeaning);
     console.log("correctMeaning", correctMeaning);
@@ -348,6 +394,7 @@ function App() {
         )}% match)\nActual meaning: ${currentWord.meaning}`
       );
       setCorrectWords((prev) => [...prev, currentWord]);
+      handleCorrectAnswer(currentWord);
       setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(() => {
         setDisableInput(false);
@@ -368,6 +415,8 @@ function App() {
           similarity: bestSimilarity,
         },
       ]);
+      // Add to incorrect words group
+      updateIncorrectWordsGroup((prev) => new Set([...prev, currentWord]));
       setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(() => {
         setDisableInput(false);
@@ -375,6 +424,12 @@ function App() {
         loadNewWord();
       }, 3500);
     }
+  };
+
+  // Add a function to clear incorrect words group
+  const clearIncorrectWordsGroup = () => {
+    updateIncorrectWordsGroup(new Set());
+    localStorage.removeItem("incorrectWordsGroup");
   };
 
   if (!currentWord && !gameComplete) return <div>Loading...</div>;
@@ -422,7 +477,7 @@ function App() {
             onClick={() => setGroupSectionOpen(!groupSectionOpen)}
             style={{ cursor: "pointer" }}
           >
-            Select Word Groups
+            Select Groups
             <span className="sort-button">{groupSectionOpen ? "▲" : "▼"}</span>
           </h3>
 
@@ -441,10 +496,31 @@ function App() {
                   </button>
                 ))}
               </div>
+              <div className="incorrect-words-buttons">
+                <button
+                  className={`group-button ${
+                    selectedGroups.includes("Incorrect Words") ? "selected" : ""
+                  } ${incorrectWordsGroup.size === 0 ? "disabled" : ""}`}
+                  onClick={() => handleGroupToggle("Incorrect Words")}
+                  disabled={incorrectWordsGroup.size === 0}
+                >
+                  Incorrect Words ({incorrectWordsGroup.size})
+                </button>
+                {incorrectWordsGroup.size > 0 && (
+                  <button
+                    className="group-button clear-button"
+                    onClick={clearIncorrectWordsGroup}
+                  >
+                    Clear Incorrect Words
+                  </button>
+                )}
+              </div>
               <p className="group-info">
                 {selectedGroups.length === 0
-                  ? "No groups selected - words will be chosen from all groups"
-                  : `Selected groups: ${selectedGroups.join(", ")}`}
+                  ? "All groups selected"
+                  : `${selectedGroups.length} group${
+                      selectedGroups.length === 1 ? "" : "s"
+                    } selected`}
               </p>
             </>
           )}

@@ -227,6 +227,31 @@
   border-color: #4c51bf;
 }
 
+.group-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f0f0f0;
+  border-color: #ddd;
+  color: #999;
+}
+
+.group-button.disabled:hover {
+  background-color: #f0f0f0;
+  border-color: #ddd;
+  color: #999;
+}
+
+.group-button.clear-button {
+  background-color: #f56565;
+  border-color: #f56565;
+  color: white;
+}
+
+.group-button.clear-button:hover {
+  background-color: #e53e3e;
+  border-color: #e53e3e;
+}
+
 .group-info {
   margin: 1rem 0 0 0;
   color: #666;
@@ -560,6 +585,15 @@
     padding: 0 1rem;
     box-sizing: border-box;
   }
+
+  .incorrect-words-buttons {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .incorrect-words-buttons .group-button {
+    flex: 1;
+  }
 }
 
 @media (max-width: 480px) {
@@ -858,4 +892,55 @@
   background: #f8f8f8;
   max-width: 600px;
   margin: 0 auto;
+}
+
+/* Prevent zoom on input focus for mobile devices */
+input[type="text"],
+textarea {
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Fix color change on mobile touch */
+@media (hover: none) {
+  .mcq-option:active:not(:disabled):not(.correct):not(.incorrect),
+  .mode-button:active,
+  .clue-button:active,
+  .group-button:active,
+  .correct-words li:active,
+  .incorrect-words li:active {
+    background: #4c51bf !important;
+    color: white !important;
+  }
+
+  .mcq-option.correct:active,
+  .mcq-option.incorrect:active {
+    background: inherit !important;
+    color: inherit !important;
+  }
+
+  .group-button.clear-button:active {
+    background: #e53e3e !important;
+    border-color: #e53e3e !important;
+    color: white !important;
+  }
+}
+
+/* Ensure proper color inheritance for all interactive elements */
+.mcq-option,
+.mode-button,
+.clue-button,
+.group-button,
+.correct-words li,
+.incorrect-words li {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.incorrect-words-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
 }
