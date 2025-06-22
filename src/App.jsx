@@ -7,7 +7,12 @@ function Modal({ word, meanings, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h3>{word}</h3>
+        <div className="modal-header">
+          <h3>{word}</h3>
+          <button className="modal-close-x" onClick={onClose}>
+            ×
+          </button>
+        </div>
         {meanings.map((item, index) => (
           <div key={index} className="modal-meaning-group">
             <p className="modal-meaning">{item.meaning}</p>
@@ -45,9 +50,39 @@ function Modal({ word, meanings, onClose }) {
             )}
           </div>
         ))}
-        <button onClick={onClose} className="modal-close">
-          Close
-        </button>
+      </div>
+    </div>
+  );
+}
+
+function IncorrectWordsModal({ words, onClose, onWordClick }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-content incorrect-words-list"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-header">
+          <h3>Incorrect Words List</h3>
+          <button className="modal-close-x" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <div className="incorrect-words-scroll">
+          {Array.from(words).map((word, index) => (
+            <div
+              key={index}
+              className="incorrect-word-item"
+              onClick={(e) => {
+                e.stopPropagation();
+                onWordClick(word);
+              }}
+            >
+              <span className="word">{word.word}</span>
+              <span className="meaning">{word.meaning}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -61,9 +96,37 @@ function App() {
   const [incorrectWords, setIncorrectWords] = useState([]);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [incorrectWordsGroup, setIncorrectWordsGroup] = useState(() => {
-    // Initialize from localStorage if available
-    const savedGroup = localStorage.getItem("incorrectWordsGroup");
-    return savedGroup ? new Set(JSON.parse(savedGroup)) : new Set();
+    try {
+      // Initialize from localStorage if available
+      const savedGroup = localStorage.getItem("incorrectWordsGroup");
+      if (!savedGroup) return new Set();
+
+      // Parse saved words and validate against ALL_GROUPS
+      const savedWords = JSON.parse(savedGroup);
+      if (!Array.isArray(savedWords)) return new Set();
+
+      const allWords = Object.values(ALL_GROUPS).flat();
+
+      // Only keep valid word objects that exist in ALL_GROUPS
+      const validWords = savedWords.filter((item) => {
+        if (!item) return false;
+        const wordToCheck = typeof item === "string" ? item : item.word || null;
+        if (!wordToCheck) return false;
+        return allWords.some((w) => w.word === wordToCheck);
+      });
+
+      // Convert any string entries to full word objects
+      const fullWordObjects = validWords.map((item) => {
+        if (typeof item === "object" && item.word && item.meaning) return item;
+        const wordStr = typeof item === "string" ? item : item.word;
+        return allWords.find((w) => w.word === wordStr);
+      });
+
+      return new Set(fullWordObjects);
+    } catch (error) {
+      console.error("Error initializing incorrectWordsGroup:", error);
+      return new Set();
+    }
   });
   const [askedWords, setAskedWords] = useState(new Set());
   const [availableWords, setAvailableWords] = useState([]);
@@ -80,6 +143,7 @@ function App() {
   const [similarityScore, setSimilarityScore] = useState(null);
   const [showClue, setShowClue] = useState(false);
   const [selectedMcqOptions, setSelectedMcqOptions] = useState(new Set());
+  const [showIncorrectWordsModal, setShowIncorrectWordsModal] = useState(false);
 
   const totalWords = availableWords.length;
   const wordsLeft = totalWords - askedWords.size;
@@ -228,6 +292,14 @@ function App() {
 
   const loadNewWord = () => {
     const newWord = getRandomWord();
+
+    // let newWord = getRandomWord();
+
+    // // If we somehow got the same word as current, try one more time
+    // if (newWord && currentWord && newWord.word === currentWord.word) {
+    //   newWord = getRandomWord();
+    // }
+
     setCurrentWord(newWord);
     if (newWord) {
       if (
@@ -269,11 +341,45 @@ function App() {
   }, [availableWords]);
 
   const updateIncorrectWordsGroup = (newGroup) => {
-    setIncorrectWordsGroup(newGroup);
-    localStorage.setItem(
-      "incorrectWordsGroup",
-      JSON.stringify(Array.from(newGroup))
-    );
+    try {
+      // If newGroup is a function, call it to get the actual Set
+      const finalGroup =
+        typeof newGroup === "function"
+          ? newGroup(incorrectWordsGroup)
+          : newGroup;
+
+      // Ensure we have a valid iterable
+      if (!finalGroup || typeof finalGroup[Symbol.iterator] !== "function") {
+        console.error("Invalid group provided to updateIncorrectWordsGroup");
+        return;
+      }
+
+      const allWords = Object.values(ALL_GROUPS).flat();
+
+      // Convert Set to Array for storage, ensuring we store complete word objects
+      const wordsToStore = Array.from(finalGroup)
+        .filter((item) => {
+          if (!item) return false;
+          const wordToCheck =
+            typeof item === "string" ? item : item.word || null;
+          return wordToCheck && allWords.some((w) => w.word === wordToCheck);
+        })
+        .map((item) => {
+          // If it's already a complete word object, use it as is
+          if (typeof item === "object" && item.word && item.meaning) {
+            return item;
+          }
+          // If it's just a word string or partial object, find the complete word object
+          const wordStr = typeof item === "string" ? item : item.word;
+          return allWords.find((w) => w.word === wordStr);
+        })
+        .filter(Boolean); // Remove any null values
+
+      setIncorrectWordsGroup(new Set(wordsToStore));
+      localStorage.setItem("incorrectWordsGroup", JSON.stringify(wordsToStore));
+    } catch (error) {
+      console.error("Error updating incorrectWordsGroup:", error);
+    }
   };
 
   const handleCorrectAnswer = (word) => {
@@ -290,10 +396,12 @@ function App() {
     if (disableInput) return;
     setDisableInput(true);
 
+    // Update askedWords immediately
+    setAskedWords((prev) => new Set([...prev, currentWord.word]));
+
     if (userInput.toLowerCase().trim() === currentWord.word.toLowerCase()) {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
-      setAskedWords((prev) => new Set([...prev, currentWord.word]));
       handleCorrectAnswer(currentWord);
       setTimeout(() => {
         setDisableInput(false);
@@ -310,7 +418,6 @@ function App() {
       ]);
       // Add to incorrect words group
       updateIncorrectWordsGroup((prev) => new Set([...prev, currentWord]));
-      setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(() => {
         setDisableInput(false);
         loadNewWord();
@@ -322,6 +429,9 @@ function App() {
     if (selectedMcqOption !== null) return;
     setSelectedMcqOption(selectedOption);
 
+    // Update askedWords immediately
+    setAskedWords((prev) => new Set([...prev, currentWord.word]));
+
     const isCorrect =
       gameMode === "mcq-word"
         ? selectedOption === currentWord.word
@@ -330,7 +440,6 @@ function App() {
     if (isCorrect) {
       setFeedback("Correct!");
       setCorrectWords((prev) => [...prev, currentWord]);
-      setAskedWords((prev) => new Set([...prev, currentWord.word]));
       handleCorrectAnswer(currentWord);
       setTimeout(loadNewWord, 1500);
     } else {
@@ -348,7 +457,6 @@ function App() {
       ]);
       // Add to incorrect words group
       updateIncorrectWordsGroup((prev) => new Set([...prev, currentWord]));
-      setAskedWords((prev) => new Set([...prev, currentWord.word]));
       setTimeout(loadNewWord, 2500);
     }
   };
@@ -643,6 +751,13 @@ function App() {
                   disabled={incorrectWordsGroup.size === 0}
                 >
                   Incorrect Words ({incorrectWordsGroup.size})
+                </button>
+                <button
+                  className="eye-button"
+                  onClick={() => setShowIncorrectWordsModal(true)}
+                  disabled={incorrectWordsGroup.size === 0}
+                >
+                  👁️
                 </button>
                 {incorrectWordsGroup.size > 0 && (
                   <button
@@ -980,15 +1095,32 @@ function App() {
         </div>
       </div>
 
-      {showModal && (
-        <Modal
-          word={selectedWord.word}
-          meanings={selectedWord.meanings}
-          onClose={() => {
-            setShowModal(false);
-            setSelectedWord(null);
+      {showIncorrectWordsModal && (
+        <IncorrectWordsModal
+          words={incorrectWordsGroup}
+          onClose={() => setShowIncorrectWordsModal(false)}
+          onWordClick={(word) => {
+            const allMeanings = findAllMeanings(word.word);
+            setSelectedWord({
+              word: word.word,
+              meanings: allMeanings,
+            });
+            setShowModal(true);
           }}
         />
+      )}
+
+      {showModal && selectedWord && (
+        <div className="meaning-modal-wrapper">
+          <Modal
+            word={selectedWord.word}
+            meanings={selectedWord.meanings}
+            onClose={() => {
+              setShowModal(false);
+              setSelectedWord(null);
+            }}
+          />
+        </div>
       )}
 
       <footer className="app-footer">
