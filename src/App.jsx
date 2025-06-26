@@ -88,6 +88,62 @@ function IncorrectWordsModal({ words, onClose, onWordClick }) {
   );
 }
 
+function GroupWordsModal({
+  words,
+  onClose,
+  onWordClick,
+  searchQuery,
+  onSearchChange,
+  onRandomize,
+}) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-content group-words-list"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-header">
+          <div className="modal-title-row">
+            <h3>Group Words List</h3>
+            <button className="modal-close-x" onClick={onClose}>
+              ×
+            </button>
+          </div>
+          <div className="modal-search-row">
+            <div className="modal-search-container">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => onSearchChange(e.target.value)}
+                placeholder="Search word or meaning..."
+                className="modal-search-input"
+              />
+              <button onClick={onRandomize} className="randomize-button">
+                🎲
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="group-words-scroll">
+          {words.map((word, index) => (
+            <div
+              key={index}
+              className="group-word-item"
+              onClick={(e) => {
+                e.stopPropagation();
+                onWordClick(word);
+              }}
+            >
+              <span className="word">{word.word}</span>
+              <span className="meaning">{word.meaning}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [currentWord, setCurrentWord] = useState(null);
   const [userInput, setUserInput] = useState("");
@@ -144,6 +200,9 @@ function App() {
   const [showClue, setShowClue] = useState(false);
   const [selectedMcqOptions, setSelectedMcqOptions] = useState(new Set());
   const [showIncorrectWordsModal, setShowIncorrectWordsModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showGroupWordsModal, setShowGroupWordsModal] = useState(false);
+  const [filteredGroupWords, setFilteredGroupWords] = useState([]);
 
   const totalWords = availableWords.length;
   const wordsLeft = totalWords - askedWords.size;
@@ -158,6 +217,41 @@ function App() {
   const sortedCorrectWords = correctSortDesc
     ? [...correctWords].reverse()
     : [...correctWords];
+
+  const getGroupWords = () => {
+    if (selectedGroups.length === 0) {
+      return Object.values(ALL_GROUPS).flat();
+    }
+    return selectedGroups.reduce((acc, groupName) => {
+      if (groupName === "Incorrect Words") {
+        return [...acc, ...Array.from(incorrectWordsGroup)];
+      }
+      return [...acc, ...ALL_GROUPS[groupName]];
+    }, []);
+  };
+
+  const handleSearchChange = (query) => {
+    setSearchQuery(query);
+    const allWords = getGroupWords();
+    if (!query) {
+      setFilteredGroupWords(allWords);
+      return;
+    }
+    const lowerQuery = query.toLowerCase();
+    const filtered = allWords.filter(
+      (word) =>
+        word.word.toLowerCase().includes(lowerQuery) ||
+        word.meaning.toLowerCase().includes(lowerQuery)
+    );
+    setFilteredGroupWords(filtered);
+  };
+
+  const handleRandomize = () => {
+    const allWords = getGroupWords();
+    const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+    setSearchQuery(randomWord.word);
+    handleSearchChange(randomWord.word);
+  };
 
   const getAvailableWords = () => {
     let words = [];
@@ -729,6 +823,15 @@ function App() {
 
           {groupSectionOpen && (
             <>
+              <button
+                className="eye-button"
+                onClick={() => {
+                  handleSearchChange("");
+                  setShowGroupWordsModal(true);
+                }}
+              >
+                🔍
+              </button>
               <div className="group-buttons">
                 {Object.keys(ALL_GROUPS).map((groupName) => (
                   <button
@@ -1121,6 +1224,24 @@ function App() {
             }}
           />
         </div>
+      )}
+
+      {showGroupWordsModal && (
+        <GroupWordsModal
+          words={filteredGroupWords}
+          onClose={() => setShowGroupWordsModal(false)}
+          onWordClick={(word) => {
+            const allMeanings = findAllMeanings(word.word);
+            setSelectedWord({
+              word: word.word,
+              meanings: allMeanings,
+            });
+            setShowModal(true);
+          }}
+          searchQuery={searchQuery}
+          onSearchChange={handleSearchChange}
+          onRandomize={handleRandomize}
+        />
       )}
 
       <footer className="app-footer">
