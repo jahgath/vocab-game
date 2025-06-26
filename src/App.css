@@ -1589,3 +1589,22 @@ textarea {
 .eye-button:hover {
   transform: scale(1.1);
 }
+
+.toggle-meaning-row {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.toggle-meaning-button {
+  color: #333;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  background: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggle-meaning-button:hover {
+  background: #ddd;
+}

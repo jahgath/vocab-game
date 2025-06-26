@@ -96,6 +96,8 @@ function GroupWordsModal({
   onSearchChange,
   onRandomize,
 }) {
+  const [showMeanings, setShowMeanings] = useState(true);
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
@@ -123,7 +125,19 @@ function GroupWordsModal({
               </button>
             </div>
           </div>
+
+          {/* Toggle Meanings Button Row */}
+          <div className="toggle-meaning-row">
+            <button
+              onClick={() => setShowMeanings((prev) => !prev)}
+              className="toggle-meaning-button"
+              title={showMeanings ? "Hide Meanings" : "Show meanings"}
+            >
+              {showMeanings ? "🫣 Hide Meanings" : "🧐 Show meanings"}
+            </button>
+          </div>
         </div>
+
         <div className="group-words-scroll">
           {words.map((word, index) => (
             <div
@@ -135,7 +149,7 @@ function GroupWordsModal({
               }}
             >
               <span className="word">{word.word}</span>
-              <span className="meaning">{word.meaning}</span>
+              {showMeanings && <span className="meaning">{word.meaning}</span>}
             </div>
           ))}
         </div>
