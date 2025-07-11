@@ -4691,7 +4691,7 @@ export const GROUP_13 = [
   },
 ];
 
-const GROUP_14 = [
+export const GROUP_14 = [
   {
     word: "acquiesce",
     meaning: "agree or consent quietly without objection",
@@ -5371,6 +5371,1691 @@ export const GROUP_15 = [
   },
 ];
 
+export const GROUP_16 = [
+  {
+    word: "antedate",
+    meaning: "occur before (something) in time",
+    partOfSpeech: "Verb",
+    examples: [
+      "The artifact was found to antedate the Egyptian pyramids by centuries.",
+      "Her letter antedated his arrival, proving she knew he was coming.",
+    ],
+    synonyms: ["precede", "predate", "forego"],
+    antonyms: ["postdate", "follow", "succeed"],
+  },
+  {
+    word: "banish",
+    meaning: "expel from a place, especially as punishment; get rid of",
+    partOfSpeech: "Verb",
+    examples: [
+      "The king decided to banish the traitor from the kingdom.",
+      "She tried to banish all negative thoughts from her mind.",
+    ],
+    synonyms: ["exile", "deport", "oust"],
+    antonyms: ["welcome", "accept", "embrace"],
+  },
+  {
+    word: "bridle",
+    meaning: "control or restrain",
+    partOfSpeech: "Verb",
+    examples: [
+      "He struggled to bridle his anger during the argument.",
+      "The rider used the reins to bridle the spirited horse.",
+    ],
+    synonyms: ["curb", "check", "constrain"],
+    antonyms: ["release", "unleash", "free"],
+  },
+  {
+    word: "comply",
+    meaning: "obey someone's rules or wishes; meet certain standards",
+    partOfSpeech: "Verb",
+    examples: [
+      "All visitors must comply with the museum's photography policy.",
+      "The company failed to comply with environmental regulations.",
+    ],
+    synonyms: ["conform", "acquiesce", "submit"],
+    antonyms: ["defy", "resist", "disobey"],
+  },
+  {
+    word: "crestfallen",
+    meaning: "disappointed, dispirited, or depressed",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The team was crestfallen after losing the championship game.",
+      "She looked crestfallen when her application was rejected.",
+    ],
+    synonyms: ["dejected", "despondent", "downcast"],
+    antonyms: ["elated", "cheerful", "jubilant"],
+  },
+  {
+    word: "curtail",
+    meaning: "restrict or limit; decrease in quantity",
+    partOfSpeech: "Verb",
+    examples: [
+      "The school had to curtail outdoor activities due to bad weather.",
+      "We need to curtail our spending to save money.",
+    ],
+    synonyms: ["reduce", "cut back", "diminish"],
+    antonyms: ["increase", "extend", "expand"],
+  },
+  {
+    word: "elucidate",
+    meaning: "make clear; clarify or shed light on",
+    partOfSpeech: "Verb",
+    examples: [
+      "The professor used diagrams to elucidate the complex theory.",
+      "Could you elucidate your point further?",
+    ],
+    synonyms: ["explain", "illuminate", "interpret"],
+    antonyms: ["obscure", "confuse", "complicate"],
+  },
+  {
+    word: "evade",
+    meaning:
+      "1. avoid or escape from, typically in a cunning way 2. deflect from giving a clear answer",
+    partOfSpeech: "Verb",
+    examples: [
+      "The suspect managed to evade capture for weeks.",
+      "The politician evaded the reporter's question skillfully.",
+    ],
+    synonyms: ["dodge", "elude", "sidestep"],
+    antonyms: ["confront", "face", "address"],
+  },
+  {
+    word: "feckless",
+    meaning: "without skill, ineffective, incompetent",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His feckless attempts at repair only made the problem worse.",
+      "The feckless manager was soon replaced.",
+    ],
+    synonyms: ["inept", "useless", "irresponsible"],
+    antonyms: ["competent", "capable", "effective"],
+  },
+  {
+    word: "fester",
+    meaning:
+      "(of a negative feeling or a problem) worsen, especially due to lack of attention",
+    partOfSpeech: "Verb",
+    examples: [
+      "Resentment began to fester between the two former friends.",
+      "The untreated wound started to fester.",
+    ],
+    synonyms: ["rankle", "worsen", "deteriorate"],
+    antonyms: ["heal", "improve", "resolve"],
+  },
+  {
+    word: "iconoclastic",
+    meaning: "challenging or overthrowing tradition or established beliefs",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The artist's iconoclastic works shocked the conservative art world.",
+      "His iconoclastic views made him unpopular with traditionalists.",
+    ],
+    synonyms: ["unconventional", "radical", "heretical"],
+    antonyms: ["conventional", "orthodox", "traditional"],
+  },
+  {
+    word: "immure",
+    meaning: "imprison or isolate",
+    partOfSpeech: "Verb",
+    examples: [
+      "The rebels were immured in the castle dungeon.",
+      "She felt immured in her small hometown.",
+    ],
+    synonyms: ["confine", "incarcerate", "seclude"],
+    antonyms: ["free", "liberate", "release"],
+  },
+  {
+    word: "improvise",
+    meaning: "create something spontaneously without preparation",
+    partOfSpeech: "Verb",
+    examples: [
+      "When the speaker didn't arrive, she had to improvise a speech.",
+      "The jazz band loved to improvise during performances.",
+    ],
+    synonyms: ["ad-lib", "extemporize", "wing it"],
+    antonyms: ["prepare", "plan", "rehearse"],
+  },
+  {
+    word: "inhibit",
+    meaning: "make difficult to accomplish; act as an obstacle",
+    partOfSpeech: "Verb",
+    examples: [
+      "Fear can inhibit people from taking risks.",
+      "The tight dress inhibited her movement.",
+    ],
+    synonyms: ["hinder", "restrain", "hamper"],
+    antonyms: ["encourage", "facilitate", "promote"],
+  },
+  {
+    word: "inscrutable",
+    meaning: "not easily understood; mysterious",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The sphinx's inscrutable expression has puzzled people for centuries.",
+      "He maintained an inscrutable smile throughout the interview.",
+    ],
+    synonyms: ["enigmatic", "impenetrable", "unfathomable"],
+    antonyms: ["transparent", "clear", "obvious"],
+  },
+  {
+    word: "lionize",
+    meaning: "treat someone as a celebrity or hero",
+    partOfSpeech: "Verb",
+    examples: [
+      "The town began to lionize the young athlete after his Olympic victory.",
+      "Modern society tends to lionize wealthy entrepreneurs.",
+    ],
+    synonyms: ["celebrate", "glorify", "idolize"],
+    antonyms: ["vilify", "criticize", "disparage"],
+  },
+  {
+    word: "monotonous",
+    meaning: "lacking in variety, repetitively dull",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The monotonous drone of the lecture put everyone to sleep.",
+      "Factory work can be monotonous and tiring.",
+    ],
+    synonyms: ["tedious", "repetitive", "humdrum"],
+    antonyms: ["varied", "interesting", "exciting"],
+  },
+  {
+    word: "peculiar",
+    meaning: "strange or unusual; specific to a particular place or group",
+    partOfSpeech: "Adjective",
+    examples: [
+      "There was a peculiar smell coming from the basement.",
+      "This custom is peculiar to the mountain villages.",
+    ],
+    synonyms: ["odd", "quirky", "distinctive"],
+    antonyms: ["normal", "common", "universal"],
+  },
+  {
+    word: "premeditate",
+    meaning: "consider or plan beforehand",
+    partOfSpeech: "Verb",
+    examples: [
+      "The prosecution argued that the murder was premeditated.",
+      "Her generous act appeared spontaneous, not premeditated.",
+    ],
+    synonyms: ["plan", "plot", "calculate"],
+    antonyms: ["improvise", "spontaneize", "ad-lib"],
+  },
+  {
+    word: "profligate",
+    meaning: "inclined to waste resources or behave extravagantly",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His profligate spending left him bankrupt.",
+      "The profligate use of natural resources cannot continue.",
+    ],
+    synonyms: ["wasteful", "extravagant", "prodigal"],
+    antonyms: ["frugal", "thrifty", "economical"],
+  },
+  {
+    word: "reconcile",
+    meaning: "bring back or return to harmony; restore a relationship",
+    partOfSpeech: "Verb",
+    examples: [
+      "After years of feuding, the brothers finally reconciled.",
+      "It's difficult to reconcile his actions with his words.",
+    ],
+    synonyms: ["harmonize", "settle", "mend"],
+    antonyms: ["alienate", "estrange", "separate"],
+  },
+  {
+    word: "refine",
+    meaning:
+      "1. purify; bring to a pure state 2. improve in accuracy or excellence",
+    partOfSpeech: "Verb",
+    examples: [
+      "Crude oil is refined to produce gasoline.",
+      "She refined her argument after considering the feedback.",
+    ],
+    synonyms: ["purify", "improve", "perfect"],
+    antonyms: ["coarsen", "degrade", "adulterate"],
+  },
+  {
+    word: "relinquish",
+    meaning: "give up or release a claim, right, or possession",
+    partOfSpeech: "Verb",
+    examples: [
+      "He reluctantly relinquished control of the company.",
+      "The soldier refused to relinquish his post.",
+    ],
+    synonyms: ["surrender", "yield", "abandon"],
+    antonyms: ["retain", "keep", "maintain"],
+  },
+  {
+    word: "ruminate",
+    meaning: "meditate or reflect; ponder over",
+    partOfSpeech: "Verb",
+    examples: [
+      "She needed time to ruminate on the job offer.",
+      "Cows ruminate their food as well as their thoughts.",
+    ],
+    synonyms: ["contemplate", "muse", "cogitate"],
+    antonyms: ["ignore", "disregard", "dismiss"],
+  },
+  {
+    word: "skittish",
+    meaning: "easily scared or startled; timid; difficult to control",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The skittish horse bolted at the sound of fireworks.",
+      "Investors have been skittish about the volatile market.",
+    ],
+    synonyms: ["nervous", "jumpy", "fidgety"],
+    antonyms: ["calm", "composed", "steady"],
+  },
+  {
+    word: "superfluous",
+    meaning: "more than is necessary; excessive",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The report was full of superfluous details that obscured the main points.",
+      "After packing, she removed several superfluous items from her suitcase.",
+    ],
+    synonyms: ["redundant", "unnecessary", "excess"],
+    antonyms: ["essential", "necessary", "vital"],
+  },
+  {
+    word: "synoptic",
+    meaning: "providing a general overview or summary",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The professor began with a synoptic view of the entire field.",
+      "The report gives a synoptic account of the year's events.",
+    ],
+    synonyms: ["summary", "abridged", "concise"],
+    antonyms: ["detailed", "comprehensive", "exhaustive"],
+  },
+  {
+    word: "thorough",
+    meaning: "careful and complete concerning every detail",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She gave the document a thorough review before approving it.",
+      "The police conducted a thorough investigation.",
+    ],
+    synonyms: ["exhaustive", "meticulous", "comprehensive"],
+    antonyms: ["superficial", "cursory", "partial"],
+  },
+  {
+    word: "visionary",
+    meaning: "showing foresight or imagination",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The CEO's visionary leadership transformed the company.",
+      "Many of da Vinci's visionary inventions were ahead of their time.",
+    ],
+    synonyms: ["innovative", "forward-thinking", "imaginative"],
+    antonyms: ["unimaginative", "short-sighted", "practical"],
+  },
+  {
+    word: "vociferous",
+    meaning: "expressing opinions or feelings loudly and forcefully",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The protestors were vociferous in their demands.",
+      "A vociferous minority opposed the new policy.",
+    ],
+    synonyms: ["vehement", "outspoken", "clamorous"],
+    antonyms: ["quiet", "reticent", "subdued"],
+  },
+];
+
+export const GROUP_17 = [
+  {
+    word: "acclaim",
+    meaning: "1. praise with great approval 2. enthusiastic approval",
+    partOfSpeech: "Noun/Verb",
+    examples: [
+      "The novel received critical acclaim from reviewers.",
+      "The audience acclaimed the performance with a standing ovation.",
+    ],
+    synonyms: ["praise", "applause", "commendation"],
+    antonyms: ["criticism", "condemnation", "disapproval"],
+  },
+  {
+    word: "ascertain",
+    meaning: "find out or learn with certainty",
+    partOfSpeech: "Verb",
+    examples: [
+      "Detectives worked to ascertain the cause of death.",
+      "We need to ascertain whether these reports are accurate.",
+    ],
+    synonyms: ["determine", "establish", "verify"],
+    antonyms: ["guess", "assume", "speculate"],
+  },
+  {
+    word: "assertive",
+    meaning:
+      "confident and direct in claiming one's rights or expressing ideas",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She became more assertive after the leadership training.",
+      "His assertive manner sometimes came across as aggressive.",
+    ],
+    synonyms: ["confident", "forceful", "self-assured"],
+    antonyms: ["timid", "submissive", "retiring"],
+  },
+  {
+    word: "bogus",
+    meaning: "fake or fraudulent",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The police discovered a stack of bogus hundred-dollar bills.",
+      "His excuse sounded completely bogus.",
+    ],
+    synonyms: ["counterfeit", "spurious", "sham"],
+    antonyms: ["genuine", "authentic", "real"],
+  },
+  {
+    word: "cataclysmic",
+    meaning: "causing great disruption or upheaval",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The asteroid impact had cataclysmic effects on the dinosaurs.",
+      "The stock market crash was a cataclysmic event for investors.",
+    ],
+    synonyms: ["disastrous", "devastating", "apocalyptic"],
+    antonyms: ["benign", "harmless", "inconsequential"],
+  },
+  {
+    word: "circumscribe",
+    meaning: "limit or restrict something narrowly",
+    partOfSpeech: "Verb",
+    examples: [
+      "The new laws circumscribe the powers of the president.",
+      "Their activities were circumscribed by the small budget.",
+    ],
+    synonyms: ["restrict", "limit", "confine"],
+    antonyms: ["expand", "extend", "liberate"],
+  },
+  {
+    word: "complementary",
+    meaning: "enhancing or perfecting when combined with something else",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The two theories are complementary rather than contradictory.",
+      "The wine was chosen as a complementary pairing for the meal.",
+    ],
+    synonyms: ["harmonious", "matching", "supportive"],
+    antonyms: ["contrary", "opposing", "clashing"],
+  },
+  {
+    word: "contentious",
+    meaning: "causing or likely to provoke disagreement",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The contentious debate lasted late into the night.",
+      "Property boundaries are often contentious issues between neighbors.",
+    ],
+    synonyms: ["controversial", "disputable", "argumentative"],
+    antonyms: ["agreeable", "harmonious", "uncontroversial"],
+  },
+  {
+    word: "disingenuous",
+    meaning: "pretending to be sincere or straightforward",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Her apology seemed disingenuous and insincere.",
+      "It was disingenuous of him to claim he didn't know about the policy.",
+    ],
+    synonyms: ["insincere", "deceptive", "duplicitous"],
+    antonyms: ["genuine", "sincere", "honest"],
+  },
+  {
+    word: "divulge",
+    meaning: "disclose or reveal information",
+    partOfSpeech: "Verb",
+    examples: [
+      "She refused to divulge the source of her information.",
+      "The documents divulge shocking details about the incident.",
+    ],
+    synonyms: ["disclose", "reveal", "impart"],
+    antonyms: ["conceal", "hide", "suppress"],
+  },
+  {
+    word: "dogmatic",
+    meaning: "insisting on one's ideas without being open to others'",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His dogmatic approach left no room for discussion.",
+      "The professor was known for his dogmatic teaching style.",
+    ],
+    synonyms: ["doctrinaire", "opinionated", "inflexible"],
+    antonyms: ["open-minded", "flexible", "receptive"],
+  },
+  {
+    word: "fallacious",
+    meaning: "false or mistaken",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His argument was based on fallacious reasoning.",
+      "The advertisement made several fallacious claims.",
+    ],
+    synonyms: ["erroneous", "incorrect", "misleading"],
+    antonyms: ["valid", "sound", "accurate"],
+  },
+  {
+    word: "foolhardy",
+    meaning: "recklessly daring; careless",
+    partOfSpeech: "Adjective",
+    examples: [
+      "It would be foolhardy to attempt the climb without proper equipment.",
+      "His foolhardy decision cost the company millions.",
+    ],
+    synonyms: ["rash", "imprudent", "reckless"],
+    antonyms: ["cautious", "prudent", "sensible"],
+  },
+  {
+    word: "hinder",
+    meaning: "obstruct or delay progress",
+    partOfSpeech: "Verb",
+    examples: [
+      "Bad weather hindered the rescue efforts.",
+      "Lack of funding is hindering the research project.",
+    ],
+    synonyms: ["impede", "hamper", "obstruct"],
+    antonyms: ["help", "assist", "facilitate"],
+  },
+  {
+    word: "impair",
+    meaning: "weaken or affect negatively",
+    partOfSpeech: "Verb",
+    examples: [
+      "Alcohol can severely impair your judgment.",
+      "The injury impaired his ability to walk.",
+    ],
+    synonyms: ["weaken", "diminish", "damage"],
+    antonyms: ["improve", "enhance", "strengthen"],
+  },
+  {
+    word: "impugn",
+    meaning: "challenge the truth or honesty of something",
+    partOfSpeech: "Verb",
+    examples: [
+      "The lawyer tried to impugn the witness's credibility.",
+      "I don't mean to impugn your motives, but your actions seem suspicious.",
+    ],
+    synonyms: ["challenge", "question", "dispute"],
+    antonyms: ["support", "confirm", "validate"],
+  },
+  {
+    word: "incessant",
+    meaning: "constant or unending (of something bad or unpleasant)",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The incessant noise from the construction site drove us crazy.",
+      "She grew tired of his incessant complaining.",
+    ],
+    synonyms: ["ceaseless", "unrelenting", "persistent"],
+    antonyms: ["intermittent", "occasional", "sporadic"],
+  },
+  {
+    word: "inclined",
+    meaning: "feeling a tendency or preference towards",
+    partOfSpeech: "Adjective",
+    examples: [
+      "I'm inclined to believe his version of events.",
+      "She's always been mathematically inclined.",
+    ],
+    synonyms: ["disposed", "prone", "leaning"],
+    antonyms: ["disinclined", "unwilling", "averse"],
+  },
+  {
+    word: "inveterate",
+    meaning: "deep-rooted or long-established",
+    partOfSpeech: "Adjective",
+    examples: [
+      "He's an inveterate liar who can't be trusted.",
+      "Her inveterate optimism helped her through difficult times.",
+    ],
+    synonyms: ["habitual", "chronic", "confirmed"],
+    antonyms: ["occasional", "new", "unaccustomed"],
+  },
+  {
+    word: "miserly",
+    meaning: "reluctant to spend or share; greedy",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The miserly old man refused to turn on the heat.",
+      "The company's miserly benefits package disappointed employees.",
+    ],
+    synonyms: ["stingy", "penny-pinching", "tightfisted"],
+    antonyms: ["generous", "liberal", "munificent"],
+  },
+  {
+    word: "patent",
+    meaning: "clear or obvious",
+    partOfSpeech: "Adjective",
+    examples: [
+      "It was patent to everyone that she was lying.",
+      "The solution to the problem was now patent.",
+    ],
+    synonyms: ["evident", "manifest", "apparent"],
+    antonyms: ["obscure", "hidden", "unclear"],
+  },
+  {
+    word: "petulant",
+    meaning: "irritable or impatient, especially over minor issues",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The child's petulant behavior annoyed the other passengers.",
+      "He gave a petulant response to the reasonable request.",
+    ],
+    synonyms: ["peevish", "fretful", "irritable"],
+    antonyms: ["good-natured", "cheerful", "patient"],
+  },
+  {
+    word: "pithy",
+    meaning: "expressing ideas in a concise, meaningful manner",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The professor was known for his pithy remarks.",
+      "She summarized the complex issue in a few pithy sentences.",
+    ],
+    synonyms: ["succinct", "terse", "concise"],
+    antonyms: ["verbose", "wordy", "rambling"],
+  },
+  {
+    word: "pliant",
+    meaning: "flexible or easily influenced",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The young branches were pliant and easy to bend.",
+      "He was too pliant and easily swayed by others' opinions.",
+    ],
+    synonyms: ["malleable", "adaptable", "yielding"],
+    antonyms: ["rigid", "inflexible", "unyielding"],
+  },
+  {
+    word: "sanctimonious",
+    meaning: "giving the impression that one is morally superior",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His sanctimonious lectures about charity annoyed everyone.",
+      "She dismissed their concerns with a sanctimonious smile.",
+    ],
+    synonyms: ["self-righteous", "holier-than-thou", "pious"],
+    antonyms: ["humble", "modest", "unpretentious"],
+  },
+  {
+    word: "sound",
+    meaning: "based on reason, sense, or judgment",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The committee made a sound decision based on the evidence.",
+      "His advice was always sound and practical.",
+    ],
+    synonyms: ["valid", "reasonable", "reliable"],
+    antonyms: ["unsound", "flawed", "questionable"],
+  },
+  {
+    word: "tarnish",
+    meaning: "compromise, damage, or sully",
+    partOfSpeech: "Verb",
+    examples: [
+      "The scandal tarnished the politician's reputation.",
+      "Silver tarnishes when exposed to air.",
+    ],
+    synonyms: ["sully", "stain", "blemish"],
+    antonyms: ["enhance", "polish", "honor"],
+  },
+  {
+    word: "tepid",
+    meaning: "exhibiting little passion or eagerness; lukewarm",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The audience gave the performance only tepid applause.",
+      "Her tepid response suggested she wasn't very interested.",
+    ],
+    synonyms: ["lukewarm", "halfhearted", "unenthusiastic"],
+    antonyms: ["enthusiastic", "passionate", "ardent"],
+  },
+  {
+    word: "upbraid",
+    meaning: "criticize or scold severely",
+    partOfSpeech: "Verb",
+    examples: [
+      "The coach upbraided the team for their poor performance.",
+      "She upbraided him for his irresponsible behavior.",
+    ],
+    synonyms: ["reprimand", "berate", "rebuke"],
+    antonyms: ["praise", "commend", "compliment"],
+  },
+  {
+    word: "vexation",
+    meaning: "the state of being irritated or incensed",
+    partOfSpeech: "Noun",
+    examples: [
+      "To his great vexation, the package still hadn't arrived.",
+      "The constant delays were a source of vexation for commuters.",
+    ],
+    synonyms: ["annoyance", "irritation", "frustration"],
+    antonyms: ["pleasure", "delight", "satisfaction"],
+  },
+];
+
+export const GROUP_18 = [
+  {
+    word: "abet",
+    meaning: "assist or encourage, usually in wrongdoing",
+    partOfSpeech: "Verb",
+    examples: [
+      "He was accused of abetting the thief by providing an alibi.",
+      "By remaining silent, she abetted the bullying behavior.",
+    ],
+    synonyms: ["aid", "assist", "encourage"],
+    antonyms: ["hinder", "discourage", "deter"],
+  },
+  {
+    word: "accessible",
+    meaning: "clear; capable of being understood",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The professor made complex concepts accessible to all students.",
+      "The museum is fully accessible to wheelchair users.",
+    ],
+    synonyms: ["understandable", "approachable", "available"],
+    antonyms: ["inaccessible", "unclear", "obscure"],
+  },
+  {
+    word: "acquisitive",
+    meaning: "eager to acquire and possess things",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His acquisitive nature led to a house full of collectibles.",
+      "The company became increasingly acquisitive, buying smaller competitors.",
+    ],
+    synonyms: ["greedy", "grasping", "covetous"],
+    antonyms: ["generous", "altruistic", "unmaterialistic"],
+  },
+  {
+    word: "amalgamate",
+    meaning: "merge or combine two or more things",
+    partOfSpeech: "Verb",
+    examples: [
+      "The two companies decided to amalgamate their operations.",
+      "Different cultural traditions amalgamated to form a unique festival.",
+    ],
+    synonyms: ["combine", "unite", "blend"],
+    antonyms: ["separate", "divide", "split"],
+  },
+  {
+    word: "attenuate",
+    meaning: "weaken or lessen in force or thickness",
+    partOfSpeech: "Verb",
+    examples: [
+      "The medication helps attenuate the symptoms.",
+      "The signal attenuates as it travels through the cable.",
+    ],
+    synonyms: ["weaken", "reduce", "diminish"],
+    antonyms: ["strengthen", "intensify", "amplify"],
+  },
+  {
+    word: "augment",
+    meaning: "increase or make larger",
+    partOfSpeech: "Verb",
+    examples: [
+      "She took a second job to augment her income.",
+      "The chef augmented the sauce with fresh herbs.",
+    ],
+    synonyms: ["increase", "expand", "enhance"],
+    antonyms: ["decrease", "reduce", "diminish"],
+  },
+  {
+    word: "aversion",
+    meaning: "an intense or definite dislike",
+    partOfSpeech: "Noun",
+    examples: [
+      "He has a strong aversion to public speaking.",
+      "Her aversion to risk prevented her from investing.",
+    ],
+    synonyms: ["dislike", "distaste", "repugnance"],
+    antonyms: ["affinity", "liking", "fondness"],
+  },
+  {
+    word: "blithe",
+    meaning: "showing indifference",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His blithe disregard for the rules got him into trouble.",
+      "She continued with blithe unconcern despite the warnings.",
+    ],
+    synonyms: ["heedless", "carefree", "nonchalant"],
+    antonyms: ["concerned", "anxious", "careful"],
+  },
+  {
+    word: "contempt",
+    meaning:
+      "the feeling or attitude of regarding someone or something as inferior",
+    partOfSpeech: "Noun",
+    examples: [
+      "She looked at the thief with undisguised contempt.",
+      "His contempt for authority figures was evident.",
+    ],
+    synonyms: ["scorn", "disdain", "disrespect"],
+    antonyms: ["respect", "admiration", "esteem"],
+  },
+  {
+    word: "dawdle",
+    meaning: "move slowly and without purpose",
+    partOfSpeech: "Verb",
+    examples: [
+      "Stop dawdling or we'll be late for school!",
+      "He dawdled along the path, enjoying the sunshine.",
+    ],
+    synonyms: ["linger", "loiter", "dally"],
+    antonyms: ["hurry", "rush", "speed"],
+  },
+  {
+    word: "deflect",
+    meaning:
+      "change the direction or course of something; make someone deviate",
+    partOfSpeech: "Verb",
+    examples: [
+      "The shield deflected the arrow from its target.",
+      "She skillfully deflected questions about her personal life.",
+    ],
+    synonyms: ["divert", "redirect", "avert"],
+    antonyms: ["accept", "confront", "receive"],
+  },
+  {
+    word: "discount",
+    meaning: "regard something as being unimportant or incorrect",
+    partOfSpeech: "Verb",
+    examples: [
+      "We shouldn't discount the possibility of rain.",
+      "He discounted all criticism of his methods.",
+    ],
+    synonyms: ["disregard", "dismiss", "ignore"],
+    antonyms: ["consider", "accept", "believe"],
+  },
+  {
+    word: "dissident",
+    meaning: "one who disagrees or opposes authority",
+    partOfSpeech: "Noun",
+    examples: [
+      "Political dissidents were often imprisoned.",
+      "The dissident scientist challenged the established theory.",
+    ],
+    synonyms: ["protester", "rebel", "nonconformist"],
+    antonyms: ["conformist", "supporter", "loyalist"],
+  },
+  {
+    word: "efficacious",
+    meaning: "producing the desired effect; successful",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The treatment proved efficacious in most cases.",
+      "Her efficacious leadership turned the company around.",
+    ],
+    synonyms: ["effective", "productive", "potent"],
+    antonyms: ["ineffective", "useless", "futile"],
+  },
+  {
+    word: "equitable",
+    meaning: "characterized by fairness and justice",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The judge made an equitable division of the estate.",
+      "We need an equitable solution that benefits everyone.",
+    ],
+    synonyms: ["fair", "just", "impartial"],
+    antonyms: ["unfair", "biased", "unjust"],
+  },
+  {
+    word: "erratic",
+    meaning: "unpredictable and inconsistent",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His erratic behavior worried his friends.",
+      "The team's performance has been erratic this season.",
+    ],
+    synonyms: ["unpredictable", "inconsistent", "capricious"],
+    antonyms: ["consistent", "steady", "predictable"],
+  },
+  {
+    word: "industrious",
+    meaning: "hard-working and persistent",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The industrious student always completed assignments early.",
+      "Ants are remarkably industrious creatures.",
+    ],
+    synonyms: ["diligent", "assiduous", "hardworking"],
+    antonyms: ["lazy", "indolent", "slothful"],
+  },
+  {
+    word: "inform",
+    meaning: "give form or character to something or someone",
+    partOfSpeech: "Verb",
+    examples: [
+      "His experiences in the war informed his later writing.",
+      "These principles inform all our business decisions.",
+    ],
+    synonyms: ["shape", "influence", "inspire"],
+    antonyms: ["mislead", "deceive", "distort"],
+  },
+  {
+    word: "irksome",
+    meaning: "causing annoyance or irritation",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The constant buzzing of the fly was irksome.",
+      "He found the paperwork requirements irksome and unnecessary.",
+    ],
+    synonyms: ["annoying", "vexing", "bothersome"],
+    antonyms: ["pleasing", "delightful", "agreeable"],
+  },
+  {
+    word: "manacle",
+    meaning: "(used figuratively) restrain, limit, or secure something",
+    partOfSpeech: "Verb",
+    examples: [
+      "She felt manacled by her family's expectations.",
+      "The strict regulations manacled the company's creativity.",
+    ],
+    synonyms: ["shackle", "restrain", "confine"],
+    antonyms: ["liberate", "free", "release"],
+  },
+  {
+    word: "modest",
+    meaning:
+      "1. unassuming about one's abilities or not boastful 2. limited in quantity or amount",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Despite her fame, she remained remarkably modest.",
+      "They live in a modest house in the suburbs.",
+    ],
+    synonyms: ["humble", "unpretentious", "moderate"],
+    antonyms: ["boastful", "arrogant", "extravagant"],
+  },
+  {
+    word: "noxious",
+    meaning: "harmful; injurious",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The factory released noxious fumes into the air.",
+      "She was exposed to noxious chemicals at work.",
+    ],
+    synonyms: ["toxic", "poisonous", "harmful"],
+    antonyms: ["harmless", "beneficial", "nontoxic"],
+  },
+  {
+    word: "pernicious",
+    meaning: "causing harm in a subtle way; deadly",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Racism is a pernicious social problem.",
+      "The drug has pernicious side effects.",
+    ],
+    synonyms: ["destructive", "damaging", "malignant"],
+    antonyms: ["beneficial", "harmless", "innocuous"],
+  },
+  {
+    word: "predicament",
+    meaning: "a challenging or awkward situation",
+    partOfSpeech: "Noun",
+    examples: [
+      "The lost hikers found themselves in a serious predicament.",
+      "How will you get out of this predicament?",
+    ],
+    synonyms: ["dilemma", "quandary", "plight"],
+    antonyms: ["solution", "advantage", "boon"],
+  },
+  {
+    word: "proficient",
+    meaning: "good at something; skilled",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She became proficient in three languages.",
+      "The training program made him proficient in the software.",
+    ],
+    synonyms: ["skilled", "competent", "adept"],
+    antonyms: ["incompetent", "unskilled", "inept"],
+  },
+  {
+    word: "prolix",
+    meaning: "using an excessive amount of words; long-winded",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The prolix speaker bored the audience.",
+      "His prolix writing style needed serious editing.",
+    ],
+    synonyms: ["verbose", "wordy", "rambling"],
+    antonyms: ["concise", "succinct", "terse"],
+  },
+  {
+    word: "scorn",
+    meaning:
+      "1. express strong disapproval or contempt for 2. a feeling or display of contempt or disdain",
+    partOfSpeech: "Verb/Noun",
+    examples: [
+      "She scorned his attempts at reconciliation.",
+      "His work was met with scorn by critics.",
+    ],
+    synonyms: ["contempt", "disdain", "derision"],
+    antonyms: ["admiration", "respect", "praise"],
+  },
+  {
+    word: "subordinate",
+    meaning:
+      "1. having a lower rank; less important 2. treat as of less value or importance 3. a person who is under or less important than another",
+    partOfSpeech: "Adjective/Verb/Noun",
+    examples: [
+      "She held a subordinate position in the company.",
+      "He subordinated his personal needs to the team's goals.",
+      "The manager spoke with her subordinate about the project.",
+    ],
+    synonyms: ["inferior", "secondary", "underling"],
+    antonyms: ["superior", "primary", "boss"],
+  },
+  {
+    word: "unseemly",
+    meaning: "not proper or in good taste",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Their unseemly behavior embarrassed the hosts.",
+      "It would be unseemly to discuss money at a funeral.",
+    ],
+    synonyms: ["improper", "indecorous", "inappropriate"],
+    antonyms: ["proper", "decorous", "appropriate"],
+  },
+  {
+    word: "veritable",
+    meaning: "(used to emphasize something) true; genuine",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The garden was a veritable paradise of flowers.",
+      "He's a veritable encyclopedia of baseball statistics.",
+    ],
+    synonyms: ["genuine", "real", "authentic"],
+    antonyms: ["false", "fake", "bogus"],
+  },
+];
+
+export const GROUP_19 = [
+  {
+    word: "acolyte",
+    meaning: "a person who assists or follows another person or cause",
+    partOfSpeech: "Noun",
+    examples: [
+      "The famous philosopher had many acolytes who spread his teachings.",
+      "As the CEO's acolyte, she learned the business from the ground up.",
+    ],
+    synonyms: ["follower", "disciple", "apprentice"],
+    antonyms: ["leader", "opponent", "critic"],
+  },
+  {
+    word: "anoint",
+    meaning: "appoint or designate for a particular role or purpose",
+    partOfSpeech: "Verb",
+    examples: [
+      "The board anointed her as the company's next CEO.",
+      "The media anointed the young athlete as the next superstar.",
+    ],
+    synonyms: ["appoint", "designate", "choose"],
+    antonyms: ["dethrone", "oust", "remove"],
+  },
+  {
+    word: "base",
+    meaning: "lacking principles; morally wrong",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His base motives were revealed when he betrayed his friends.",
+      "The criminal's base actions shocked the community.",
+    ],
+    synonyms: ["immoral", "dishonorable", "vile"],
+    antonyms: ["noble", "virtuous", "honorable"],
+  },
+  {
+    word: "coercion",
+    meaning:
+      "the act of persuading or forcing someone to do something using threats or violence",
+    partOfSpeech: "Noun",
+    examples: [
+      "The confession was obtained through coercion and was therefore inadmissible.",
+      "No agreement is valid if signed under coercion.",
+    ],
+    synonyms: ["force", "compulsion", "duress"],
+    antonyms: ["persuasion", "volition", "choice"],
+  },
+  {
+    word: "coin",
+    meaning: "invent or devise a new word or phrase",
+    partOfSpeech: "Verb",
+    examples: [
+      "Shakespeare coined many words that we still use today.",
+      "The marketing team coined a catchy slogan for the new product.",
+    ],
+    synonyms: ["create", "invent", "originate"],
+    antonyms: ["copy", "repeat", "reuse"],
+  },
+  {
+    word: "cunning",
+    meaning: "showing skill in achieving one's ends through deceit or evasion",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The cunning fox outsmarted the hunters.",
+      "She used cunning tactics to gain an advantage in the negotiations.",
+    ],
+    synonyms: ["crafty", "sly", "wily"],
+    antonyms: ["naive", "guileless", "ingenuous"],
+  },
+  {
+    word: "discomfit",
+    meaning: "make someone feel uneasy or embarrassed",
+    partOfSpeech: "Verb",
+    examples: [
+      "The unexpected question discomfited the speaker.",
+      "His direct gaze discomfited those who weren't being truthful.",
+    ],
+    synonyms: ["embarrass", "fluster", "disconcert"],
+    antonyms: ["comfort", "put at ease", "reassure"],
+  },
+  {
+    word: "dissent",
+    meaning:
+      "1. hold or express an opinion that varies from a prevailing or official position 2. difference of opinion or disagreement",
+    partOfSpeech: "Verb/Noun",
+    examples: [
+      "Several justices dissented from the court's majority opinion.",
+      "There was considerable dissent among committee members about the proposal.",
+    ],
+    synonyms: ["disagree", "object", "protest"],
+    antonyms: ["agree", "concur", "consent"],
+  },
+  {
+    word: "distill",
+    meaning: "extract the most important information from something",
+    partOfSpeech: "Verb",
+    examples: [
+      "The report distills years of research into key findings.",
+      "Her wisdom was distilled from decades of experience.",
+    ],
+    synonyms: ["condense", "concentrate", "extract"],
+    antonyms: ["expand", "elaborate", "dilute"],
+  },
+  {
+    word: "dubious",
+    meaning:
+      "1. (of a person's feeling) suspicious of 2. (of a thing or concept) not to be relied upon",
+    partOfSpeech: "Adjective",
+    examples: [
+      "I'm dubious about his claims of innocence.",
+      "The company used dubious accounting practices to inflate profits.",
+    ],
+    synonyms: ["doubtful", "questionable", "skeptical"],
+    antonyms: ["certain", "trustworthy", "reliable"],
+  },
+  {
+    word: "ebullient",
+    meaning: "cheerful and joyful",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Her ebullient personality made her popular at parties.",
+      "The team was ebullient after their championship win.",
+    ],
+    synonyms: ["exuberant", "enthusiastic", "vivacious"],
+    antonyms: ["gloomy", "depressed", "apathetic"],
+  },
+  {
+    word: "facetious",
+    meaning: "treating serious issues with inappropriate humor",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His facetious remarks during the meeting were poorly timed.",
+      "Don't be facetious - this is a serious matter.",
+    ],
+    synonyms: ["flippant", "frivolous", "joking"],
+    antonyms: ["serious", "earnest", "solemn"],
+  },
+  {
+    word: "fallible",
+    meaning: "capable of making an error",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Even experts are fallible and can make mistakes.",
+      "The system is fallible because it depends on human input.",
+    ],
+    synonyms: ["imperfect", "error-prone", "faulty"],
+    antonyms: ["infallible", "perfect", "flawless"],
+  },
+  {
+    word: "florid",
+    meaning: "excessively complicated; including too many details",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His florid writing style made the text difficult to follow.",
+      "The florid decorations overwhelmed the small room.",
+    ],
+    synonyms: ["ornate", "elaborate", "baroque"],
+    antonyms: ["plain", "simple", "austere"],
+  },
+  {
+    word: "gawky",
+    meaning: "awkward or clumsy",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The gawky teenager was still growing into his body.",
+      "Her gawky movements revealed her nervousness.",
+    ],
+    synonyms: ["ungainly", "clumsy", "uncoordinated"],
+    antonyms: ["graceful", "elegant", "coordinated"],
+  },
+  {
+    word: "inveigle",
+    meaning: "persuade someone to do something using flattery or deception",
+    partOfSpeech: "Verb",
+    examples: [
+      "He managed to inveigle his way into the exclusive party.",
+      "She inveigled her brother into doing her chores.",
+    ],
+    synonyms: ["coax", "wheedle", "manipulate"],
+    antonyms: ["discourage", "dissuade", "deter"],
+  },
+  {
+    word: "jettison",
+    meaning: "abandon or discard (something that is no longer needed)",
+    partOfSpeech: "Verb",
+    examples: [
+      "The company jettisoned its unpopular product line.",
+      "To save fuel, the pilot jettisoned excess cargo.",
+    ],
+    synonyms: ["discard", "dump", "shed"],
+    antonyms: ["keep", "retain", "hold"],
+  },
+  {
+    word: "mendacity",
+    meaning: "dishonesty",
+    partOfSpeech: "Noun",
+    examples: [
+      "The politician's career was ruined by his mendacity.",
+      "A culture of mendacity had infected the organization.",
+    ],
+    synonyms: ["deceit", "falsehood", "lying"],
+    antonyms: ["honesty", "truthfulness", "integrity"],
+  },
+  {
+    word: "munificent",
+    meaning: "more generous than is usual or necessary",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The munificent donor funded the entire building project.",
+      "She was known for her munificent contributions to charity.",
+    ],
+    synonyms: ["generous", "lavish", "bountiful"],
+    antonyms: ["stingy", "miserly", "tightfisted"],
+  },
+  {
+    word: "naive",
+    meaning: "showing a lack of experience or judgment",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His naive belief in people's goodness often led to disappointment.",
+      "It was naive of her to trust strangers with her money.",
+    ],
+    synonyms: ["inexperienced", "gullible", "innocent"],
+    antonyms: ["sophisticated", "worldly", "shrewd"],
+  },
+  {
+    word: "noble",
+    meaning: "having high moral qualities or principles",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Her noble actions inspired others to help the community.",
+      "He had noble intentions, even if his methods were flawed.",
+    ],
+    synonyms: ["virtuous", "honorable", "ethical"],
+    antonyms: ["ignoble", "base", "dishonorable"],
+  },
+  {
+    word: "parochial",
+    meaning: "having a limited perspective; narrow-minded",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His parochial views prevented him from understanding global issues.",
+      "The small town's parochial attitudes discouraged outsiders.",
+    ],
+    synonyms: ["provincial", "insular", "narrow"],
+    antonyms: ["cosmopolitan", "broad-minded", "sophisticated"],
+  },
+  {
+    word: "pedestrian",
+    meaning: "lacking imagination or excitement; ordinary",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The speech was pedestrian and failed to inspire the audience.",
+      "Their pedestrian approach to design produced uninspiring results.",
+    ],
+    synonyms: ["dull", "banal", "unimaginative"],
+    antonyms: ["imaginative", "original", "inspired"],
+  },
+  {
+    word: "prevaricate",
+    meaning: "evade or dodge the truth by being evasive",
+    partOfSpeech: "Verb",
+    examples: [
+      "When asked directly, he prevaricated instead of giving a straight answer.",
+      "Politicians often prevaricate when faced with difficult questions.",
+    ],
+    synonyms: ["equivocate", "hedge", "beat around the bush"],
+    antonyms: ["confess", "declare", "assert"],
+  },
+  {
+    word: "prime",
+    meaning:
+      "1. prepare something for use or action 2. of primary importance; major",
+    partOfSpeech: "Verb/Adjective",
+    examples: [
+      "She primed the wall before painting it.",
+      "The prime objective is to reduce costs without sacrificing quality.",
+    ],
+    synonyms: ["prepare", "ready", "main"],
+    antonyms: ["secondary", "unprepared", "minor"],
+  },
+  {
+    word: "radical",
+    meaning:
+      "1. far-reaching; major 2. a person advocating thorough or complete social or political reform",
+    partOfSpeech: "Adjective/Noun",
+    examples: [
+      "The company underwent radical changes under new management.",
+      "The radicals demanded complete overhaul of the political system.",
+    ],
+    synonyms: ["extreme", "revolutionary", "drastic"],
+    antonyms: ["moderate", "conservative", "incremental"],
+  },
+  {
+    word: "recrudescent",
+    meaning: "breaking out again; reviving",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Doctors were concerned about recrudescent infections in some patients.",
+      "The recrudescent violence threatened the peace process.",
+    ],
+    synonyms: ["recurring", "resurgent", "renewed"],
+    antonyms: ["waning", "subsiding", "abating"],
+  },
+  {
+    word: "temporal",
+    meaning:
+      "1. relating to time 2. relating to worldly rather than spiritual matters",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The temporal sequence of events was crucial to understanding the crime.",
+      "Monks try to rise above temporal concerns and focus on spiritual matters.",
+    ],
+    synonyms: ["secular", "worldly", "chronological"],
+    antonyms: ["spiritual", "eternal", "religious"],
+  },
+  {
+    word: "transitory",
+    meaning: "not permanent; temporary",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The pain was transitory and soon passed.",
+      "Their stay in the city was meant to be transitory.",
+    ],
+    synonyms: ["temporary", "fleeting", "ephemeral"],
+    antonyms: ["permanent", "lasting", "enduring"],
+  },
+  {
+    word: "viable",
+    meaning: "capable of working or succeeding; feasible",
+    partOfSpeech: "Adjective",
+    examples: [
+      "After the changes, the business became viable again.",
+      "Is this plan viable given our current resources?",
+    ],
+    synonyms: ["workable", "practicable", "achievable"],
+    antonyms: ["unworkable", "impracticable", "unfeasible"],
+  },
+];
+
+export const GROUP_20 = [
+  {
+    word: "abreast",
+    meaning: "informed or familiar about a particular topic",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She stayed abreast of the latest developments in her field.",
+      "It's important to keep abreast with current events.",
+    ],
+    synonyms: ["informed", "updated", "knowledgeable"],
+    antonyms: ["uninformed", "ignorant", "unaware"],
+  },
+  {
+    word: "confound",
+    meaning: "perplex or puzzle someone",
+    partOfSpeech: "Verb",
+    examples: [
+      "The magician's tricks confounded the audience.",
+      "The complex instructions confounded the new employees.",
+    ],
+    synonyms: ["baffle", "bewilder", "flummox"],
+    antonyms: ["enlighten", "clarify", "explain"],
+  },
+  {
+    word: "digression",
+    meaning: "an aside that strays from the main subject",
+    partOfSpeech: "Noun",
+    examples: [
+      "The professor's digression about his vacation lasted 20 minutes.",
+      "The book contained many interesting digressions from the main narrative.",
+    ],
+    synonyms: ["diversion", "detour", "tangent"],
+    antonyms: ["focus", "concentration", "adherence"],
+  },
+  {
+    word: "discrepancy",
+    meaning: "a difference between two or more things that should be the same",
+    partOfSpeech: "Noun",
+    examples: [
+      "There was a discrepancy between the two witness accounts.",
+      "The audit revealed discrepancies in the financial records.",
+    ],
+    synonyms: ["inconsistency", "disparity", "variance"],
+    antonyms: ["agreement", "consistency", "correspondence"],
+  },
+  {
+    word: "duplicitous",
+    meaning: "deceptive in speech or action",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The duplicitous salesman promised features the product didn't have.",
+      "Her duplicitous behavior made it hard to trust her.",
+    ],
+    synonyms: ["deceitful", "two-faced", "dishonest"],
+    antonyms: ["honest", "sincere", "truthful"],
+  },
+  {
+    word: "expedient",
+    meaning:
+      "affording short-term benefits, often at the expense of the long-term",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The temporary fix was expedient but ultimately caused more problems.",
+      "He chose the most expedient solution rather than the best one.",
+    ],
+    synonyms: ["convenient", "practical", "advantageous"],
+    antonyms: ["impractical", "inexpedient", "disadvantageous"],
+  },
+  {
+    word: "fabricate",
+    meaning: "invent in order to deceive",
+    partOfSpeech: "Verb",
+    examples: [
+      "The witness was caught fabricating his testimony.",
+      "She fabricated an excuse for being late.",
+    ],
+    synonyms: ["invent", "make up", "falsify"],
+    antonyms: ["reveal", "expose", "truthfully report"],
+  },
+  {
+    word: "glum",
+    meaning: "appearing or feeling sad or despondent",
+    partOfSpeech: "Adjective",
+    examples: [
+      "He looked glum after hearing the bad news.",
+      "The team was glum after their loss.",
+    ],
+    synonyms: ["morose", "sullen", "dejected"],
+    antonyms: ["cheerful", "happy", "upbeat"],
+  },
+  {
+    word: "harbinger",
+    meaning:
+      "a person or thing that foreshadows or foretells the coming of someone or something",
+    partOfSpeech: "Noun",
+    examples: [
+      "The first robin is often seen as a harbinger of spring.",
+      "The economic downturn was a harbinger of worse things to come.",
+    ],
+    synonyms: ["forerunner", "precursor", "herald"],
+    antonyms: ["aftermath", "result", "consequence"],
+  },
+  {
+    word: "intrinsic",
+    meaning: "belonging to the essential nature of a thing",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The intrinsic value of gold makes it desirable.",
+      "Helping others has intrinsic rewards.",
+    ],
+    synonyms: ["inherent", "innate", "essential"],
+    antonyms: ["extrinsic", "external", "superficial"],
+  },
+  {
+    word: "largesse",
+    meaning:
+      "the trait of being willing to donate money or resources; generosity",
+    partOfSpeech: "Noun",
+    examples: [
+      "The millionaire was known for his largesse to charitable causes.",
+      "The festival was made possible by the largesse of local businesses.",
+    ],
+    synonyms: ["generosity", "munificence", "bounty"],
+    antonyms: ["stinginess", "miserliness", "parsimony"],
+  },
+  {
+    word: "libertine",
+    meaning: "someone loose in morals; a pleasure-seeker",
+    partOfSpeech: "Noun",
+    examples: [
+      "The young libertine spent his inheritance on wine and parties.",
+      "In his youth, he lived the life of a libertine.",
+    ],
+    synonyms: ["hedonist", "debauchee", "profligate"],
+    antonyms: ["ascetic", "puritan", "moralist"],
+  },
+  {
+    word: "malfeasance",
+    meaning: "wrongdoing or misconduct, especially by a public official",
+    partOfSpeech: "Noun",
+    examples: [
+      "The mayor was accused of malfeasance in office.",
+      "Corporate malfeasance led to the company's downfall.",
+    ],
+    synonyms: ["misconduct", "wrongdoing", "misbehavior"],
+    antonyms: ["integrity", "probity", "honesty"],
+  },
+  {
+    word: "manifest",
+    meaning: "1. be revealed; show plainly 2. obvious; not obscure or hidden",
+    partOfSpeech: ["Verb", "Adjective"],
+    examples: [
+      "His anger manifested in his red face and clenched fists.",
+      "The benefits of exercise are manifest in her good health.",
+    ],
+    synonyms: ["evident", "apparent", "demonstrate"],
+    antonyms: ["hidden", "concealed", "obscure"],
+  },
+  {
+    word: "minute",
+    meaning: "very small",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The scientist studied minute particles under the microscope.",
+      "There were minute differences between the two samples.",
+    ],
+    synonyms: ["tiny", "microscopic", "infinitesimal"],
+    antonyms: ["large", "huge", "gigantic"],
+  },
+  {
+    word: "modish",
+    meaning: "in the current fashion or style",
+    partOfSpeech: "Adjective",
+    examples: [
+      "Her modish outfit turned heads at the party.",
+      "The restaurant's decor was modish but not very comfortable.",
+    ],
+    synonyms: ["fashionable", "trendy", "stylish"],
+    antonyms: ["outdated", "unfashionable", "old-fashioned"],
+  },
+  {
+    word: "nascent",
+    meaning: "in the process of emerging, being born, or starting to develop",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The nascent technology showed great promise.",
+      "Her nascent singing career was just beginning.",
+    ],
+    synonyms: ["emerging", "developing", "incipient"],
+    antonyms: ["mature", "developed", "established"],
+  },
+  {
+    word: "perennial",
+    meaning: "lasting or remaining active throughout the year, or all the time",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The perennial river flows even during dry seasons.",
+      "Her perennial optimism inspired those around her.",
+    ],
+    synonyms: ["constant", "enduring", "continual"],
+    antonyms: ["temporary", "ephemeral", "transient"],
+  },
+  {
+    word: "pious",
+    meaning:
+      "1. deeply devout; exhibiting religious devotion 2. making a show of one's own virtue",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The pious woman attended church daily.",
+      "His pious remarks didn't match his actions.",
+    ],
+    synonyms: ["devout", "religious", "sanctimonious"],
+    antonyms: ["impious", "irreligious", "sacrilegious"],
+  },
+  {
+    word: "providential",
+    meaning: "happening at a fortunate or opportune time",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The providential arrival of the ambulance saved his life.",
+      "The rain came at a providential moment for the farmers.",
+    ],
+    synonyms: ["fortunate", "timely", "auspicious"],
+    antonyms: ["unfortunate", "ill-timed", "inauspicious"],
+  },
+  {
+    word: "prowess",
+    meaning: "skillfulness and dexterity",
+    partOfSpeech: "Noun",
+    examples: [
+      "Her athletic prowess won her many medals.",
+      "The chef's culinary prowess was evident in every dish.",
+    ],
+    synonyms: ["skill", "expertise", "mastery"],
+    antonyms: ["incompetence", "ineptitude", "clumsiness"],
+  },
+  {
+    word: "schism",
+    meaning: "a split or separation within a group or organization",
+    partOfSpeech: "Noun",
+    examples: [
+      "The schism in the church led to the formation of a new denomination.",
+      "Political schisms divided the once-unified party.",
+    ],
+    synonyms: ["division", "rift", "split"],
+    antonyms: ["unity", "harmony", "accord"],
+  },
+  {
+    word: "slander",
+    meaning: "baselessly speak ill of someone or something",
+    partOfSpeech: "Noun/Verb",
+    examples: [
+      "The celebrity sued the magazine for slander.",
+      "He slandered his former business partner.",
+    ],
+    synonyms: ["defamation", "libel", "malign"],
+    antonyms: ["praise", "commendation", "acclaim"],
+  },
+  {
+    word: "stalwart",
+    meaning: "determined; staunch",
+    partOfSpeech: "Adjective",
+    examples: [
+      "She was a stalwart supporter of human rights.",
+      "The stalwart defenders held their ground.",
+    ],
+    synonyms: ["loyal", "steadfast", "resolute"],
+    antonyms: ["disloyal", "unreliable", "wavering"],
+  },
+  {
+    word: "supplicate",
+    meaning: "make a humble request; beg or beseech",
+    partOfSpeech: "Verb",
+    examples: [
+      "The villagers supplicated the king for mercy.",
+      "He supplicated before the altar.",
+    ],
+    synonyms: ["plead", "entreat", "implore"],
+    antonyms: ["demand", "command", "order"],
+  },
+  {
+    word: "terse",
+    meaning: "brief and to the point",
+    partOfSpeech: "Adjective",
+    examples: [
+      "His terse reply suggested he was annoyed.",
+      "The instructions were terse but clear.",
+    ],
+    synonyms: ["concise", "succinct", "laconic"],
+    antonyms: ["verbose", "wordy", "lengthy"],
+  },
+  {
+    word: "tirade",
+    meaning: "a prolonged, vehement speech or criticism",
+    partOfSpeech: "Noun",
+    examples: [
+      "The coach delivered a tirade about poor teamwork.",
+      "His political tirade lasted over an hour.",
+    ],
+    synonyms: ["diatribe", "harangue", "rant"],
+    antonyms: ["praise", "compliment", "accolade"],
+  },
+  {
+    word: "universal",
+    meaning: "applicable or common to all purposes, conditions, or situations",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The desire for happiness is universal.",
+      "The film had universal appeal across all age groups.",
+    ],
+    synonyms: ["global", "general", "ubiquitous"],
+    antonyms: ["particular", "specific", "limited"],
+  },
+  {
+    word: "vanquish",
+    meaning: "defeat completely",
+    partOfSpeech: "Verb",
+    examples: [
+      "The hero vanquished the villain in the final battle.",
+      "She vanquished her fear of public speaking.",
+    ],
+    synonyms: ["conquer", "overcome", "subdue"],
+    antonyms: ["surrender", "lose", "succumb"],
+  },
+  {
+    word: "woeful",
+    meaning: "1. very sad 2. very bad; awful",
+    partOfSpeech: "Adjective",
+    examples: [
+      "The woeful widow mourned her husband.",
+      "The team's woeful performance disappointed their fans.",
+    ],
+    synonyms: ["sorrowful", "miserable", "deplorable"],
+    antonyms: ["joyful", "excellent", "admirable"],
+  },
+];
+
 // Export all groups in an object for easy access
 export const ALL_GROUPS = {
   "Group 1": GROUP_1,
@@ -5388,4 +7073,9 @@ export const ALL_GROUPS = {
   "Group 13": GROUP_13,
   "Group 14": GROUP_14,
   "Group 15": GROUP_15,
+  "Group 16": GROUP_16,
+  "Group 17": GROUP_17,
+  "Group 18": GROUP_18,
+  "Group 19": GROUP_19,
+  "Group 20": GROUP_20,
 };
