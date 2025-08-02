@@ -88,6 +88,206 @@ function IncorrectWordsModal({ words, onClose, onWordClick }) {
   );
 }
 
+function CustomGroupModal({
+  onClose,
+  onCreateGroup,
+  customGroupInput,
+  setCustomGroupInput,
+  customGroupName,
+  setCustomGroupName,
+}) {
+  const [validWords, setValidWords] = useState([]);
+  const [invalidWords, setInvalidWords] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const processWordList = () => {
+    if (!customGroupInput.trim()) {
+      setValidWords([]);
+      setInvalidWords([]);
+      return;
+    }
+
+    setIsProcessing(true);
+    const inputWords = customGroupInput
+      .trim()
+      .split(/\s+/)
+      .map((word) => word.toLowerCase().trim())
+      .filter((word) => word.length > 0);
+    const allWords = Object.values(ALL_GROUPS).flat();
+
+    const valid = [];
+    const invalid = [];
+
+    inputWords.forEach((inputWord) => {
+      const foundWord = allWords.find(
+        (w) => w.word.toLowerCase() === inputWord
+      );
+      if (foundWord) {
+        // Avoid duplicates
+        if (
+          !valid.some(
+            (v) => v.word.toLowerCase() === foundWord.word.toLowerCase()
+          )
+        ) {
+          valid.push(foundWord);
+        }
+      } else {
+        if (!invalid.includes(inputWord)) {
+          invalid.push(inputWord);
+        }
+      }
+    });
+
+    setValidWords(valid);
+    setInvalidWords(invalid);
+    setIsProcessing(false);
+  };
+
+  const handleCreateGroup = () => {
+    if (!customGroupName.trim()) {
+      alert("Please enter a group name");
+      return;
+    }
+    if (validWords.length === 0) {
+      alert("No valid words found. Please check your word list.");
+      return;
+    }
+    onCreateGroup(customGroupName.trim(), validWords);
+  };
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-content custom-group-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-header">
+          <h3>Create Custom Group</h3>
+          <button className="modal-close-x" onClick={onClose}>
+            ×
+          </button>
+        </div>
+
+        <div className="custom-group-form">
+          <div className="form-group">
+            <label htmlFor="groupName">Group Name:</label>
+            <input
+              id="groupName"
+              type="text"
+              value={customGroupName}
+              onChange={(e) => setCustomGroupName(e.target.value)}
+              placeholder="Enter group name..."
+              className="group-name-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="wordList">Paste Word List (space-separated):</label>
+            <textarea
+              id="wordList"
+              value={customGroupInput}
+              onChange={(e) => {
+                setCustomGroupInput(e.target.value);
+                // Auto-process as user types (with debounce effect)
+                setTimeout(processWordList, 300);
+              }}
+              placeholder="Paste your words here, separated by spaces..."
+              className="word-list-input"
+              rows={6}
+            />
+          </div>
+
+          <button
+            onClick={processWordList}
+            className="process-button"
+            disabled={isProcessing}
+          >
+            {isProcessing ? "Processing..." : "Process Words"}
+          </button>
+        </div>
+
+        {(validWords.length > 0 || invalidWords.length > 0) && (
+          <div className="word-validation-results">
+            {validWords.length > 0 && (
+              <div className="valid-words">
+                <h4>✅ Valid Words ({validWords.length}):</h4>
+                <div className="word-list">
+                  {validWords.map((word, index) => (
+                    <span key={index} className="valid-word">
+                      {word.word}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {invalidWords.length > 0 && (
+              <div className="invalid-words">
+                <h4>❌ Invalid Words ({invalidWords.length}):</h4>
+                <div className="word-list">
+                  {invalidWords.map((word, index) => (
+                    <span key={index} className="invalid-word">
+                      {word}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="modal-actions">
+          <button onClick={onClose} className="cancel-button">
+            Cancel
+          </button>
+          <button
+            onClick={handleCreateGroup}
+            className="create-button"
+            disabled={!customGroupName.trim() || validWords.length === 0}
+          >
+            Create Group ({validWords.length} words)
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DeleteCustomGroupModal({ groupName, onClose, onConfirm }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-content delete-confirm-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-header">
+          <h3>Delete Custom Group</h3>
+          <button className="modal-close-x" onClick={onClose}>
+            ×
+          </button>
+        </div>
+
+        <div className="delete-confirm-content">
+          <p>
+            Are you sure you want to delete the custom group{" "}
+            <strong>"{groupName}"</strong>?
+          </p>
+          <p className="warning-text">This action cannot be undone.</p>
+        </div>
+
+        <div className="modal-actions">
+          <button onClick={onClose} className="cancel-button">
+            Cancel
+          </button>
+          <button onClick={onConfirm} className="delete-confirm-button">
+            Delete Group
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function GroupWordsModal({
   words,
   onClose,
@@ -217,6 +417,20 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showGroupWordsModal, setShowGroupWordsModal] = useState(false);
   const [filteredGroupWords, setFilteredGroupWords] = useState([]);
+  const [customGroups, setCustomGroups] = useState(() => {
+    try {
+      const saved = localStorage.getItem("customGroups");
+      return saved ? JSON.parse(saved) : {};
+    } catch (error) {
+      console.error("Error loading custom groups:", error);
+      return {};
+    }
+  });
+  const [showCustomGroupModal, setShowCustomGroupModal] = useState(false);
+  const [customGroupInput, setCustomGroupInput] = useState("");
+  const [customGroupName, setCustomGroupName] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [groupToDelete, setGroupToDelete] = useState("");
 
   const totalWords = availableWords.length;
   const wordsLeft = totalWords - askedWords.size;
@@ -234,11 +448,17 @@ function App() {
 
   const getGroupWords = () => {
     if (selectedGroups.length === 0) {
-      return Object.values(ALL_GROUPS).flat();
+      return [
+        ...Object.values(ALL_GROUPS).flat(),
+        ...Object.values(customGroups).flat(),
+      ];
     }
     return selectedGroups.reduce((acc, groupName) => {
       if (groupName === "Incorrect Words") {
         return [...acc, ...Array.from(incorrectWordsGroup)];
+      }
+      if (customGroups[groupName]) {
+        return [...acc, ...customGroups[groupName]];
       }
       return [...acc, ...ALL_GROUPS[groupName]];
     }, []);
@@ -270,11 +490,16 @@ function App() {
   const getAvailableWords = () => {
     let words = [];
     if (selectedGroups.length === 0) {
-      words = Object.values(ALL_GROUPS).flat();
+      words = [
+        ...Object.values(ALL_GROUPS).flat(),
+        ...Object.values(customGroups).flat(),
+      ];
     } else {
       selectedGroups.forEach((groupName) => {
         if (groupName === "Incorrect Words") {
           words = [...words, ...Array.from(incorrectWordsGroup)];
+        } else if (customGroups[groupName]) {
+          words = [...words, ...customGroups[groupName]];
         } else {
           words = [...words, ...ALL_GROUPS[groupName]];
         }
@@ -586,6 +811,54 @@ function App() {
     }
   };
 
+  const handleCreateCustomGroup = (groupName, words) => {
+    const newCustomGroups = {
+      ...customGroups,
+      [groupName]: words,
+    };
+    setCustomGroups(newCustomGroups);
+
+    // Save to localStorage
+    try {
+      localStorage.setItem("customGroups", JSON.stringify(newCustomGroups));
+    } catch (error) {
+      console.error("Error saving custom groups:", error);
+    }
+
+    // Close modal and reset inputs
+    setShowCustomGroupModal(false);
+    setCustomGroupInput("");
+    setCustomGroupName("");
+
+    // Auto-select the new group
+    setSelectedGroups([groupName]);
+  };
+
+  const handleDeleteCustomGroup = (groupName) => {
+    setGroupToDelete(groupName);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteCustomGroup = () => {
+    const newCustomGroups = { ...customGroups };
+    delete newCustomGroups[groupToDelete];
+    setCustomGroups(newCustomGroups);
+
+    // Save to localStorage
+    try {
+      localStorage.setItem("customGroups", JSON.stringify(newCustomGroups));
+    } catch (error) {
+      console.error("Error saving custom groups:", error);
+    }
+
+    // Remove from selected groups if it was selected
+    setSelectedGroups((prev) => prev.filter((g) => g !== groupToDelete));
+
+    // Close modal and reset state
+    setShowDeleteModal(false);
+    setGroupToDelete("");
+  };
+
   const findAllMeanings = (word) => {
     const allMeanings = [];
     Object.values(ALL_GROUPS).forEach((group) => {
@@ -858,6 +1131,42 @@ function App() {
                     {groupName}
                   </button>
                 ))}
+              </div>
+
+              {/* Custom Groups Section */}
+              <div className="custom-groups-section">
+                <h4>Custom Groups</h4>
+                <div className="create-custom-group-section">
+                  <button
+                    className="create-custom-group-button"
+                    onClick={() => setShowCustomGroupModal(true)}
+                  >
+                    Create Custom Group
+                  </button>
+                </div>
+                {Object.keys(customGroups).length > 0 && (
+                  <div className="group-buttons">
+                    {Object.keys(customGroups).map((groupName) => (
+                      <div key={groupName} className="custom-group-item">
+                        <button
+                          className={`group-button ${
+                            selectedGroups.includes(groupName) ? "selected" : ""
+                          }`}
+                          onClick={() => handleGroupToggle(groupName)}
+                        >
+                          {groupName} ({customGroups[groupName].length})
+                        </button>
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDeleteCustomGroup(groupName)}
+                          title="Delete custom group"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="incorrect-words-buttons">
                 <button
@@ -1255,6 +1564,32 @@ function App() {
           searchQuery={searchQuery}
           onSearchChange={handleSearchChange}
           onRandomize={handleRandomize}
+        />
+      )}
+
+      {showCustomGroupModal && (
+        <CustomGroupModal
+          onClose={() => {
+            setShowCustomGroupModal(false);
+            setCustomGroupInput("");
+            setCustomGroupName("");
+          }}
+          onCreateGroup={handleCreateCustomGroup}
+          customGroupInput={customGroupInput}
+          setCustomGroupInput={setCustomGroupInput}
+          customGroupName={customGroupName}
+          setCustomGroupName={setCustomGroupName}
+        />
+      )}
+
+      {showDeleteModal && (
+        <DeleteCustomGroupModal
+          groupName={groupToDelete}
+          onClose={() => {
+            setShowDeleteModal(false);
+            setGroupToDelete("");
+          }}
+          onConfirm={confirmDeleteCustomGroup}
         />
       )}
 
