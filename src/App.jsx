@@ -955,7 +955,7 @@ function App() {
 
     // Compare with meaning
     const correctParts = correctMeaning
-      .split(/;|\/|\bor\b/)
+      .split(/;|\/|\bor\b|\b\d+\.\s*/i)
       .map((s) => s.trim())
       .filter((s) => s.length > 0);
 
